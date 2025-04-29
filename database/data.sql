@@ -14,7 +14,7 @@ VALUES
     1
 );
 INSERT INTO questions (
-  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
 ) VALUES (
   2,
   'Ethical and Professional Standards',
@@ -26,4 +26,79 @@ INSERT INTO questions (
   'treat the account like other client accounts.',
   'remove himself from any direct involvement by transferring responsibility for this account to another investment professional in the firm.',
   2
+);
+
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  3,
+  'Economics',
+  'Understanding Business Cycles',
+  'Assuming all other factors remain unchanged, which of the following changes would most likely cause a simultaneous increase in the participation ratio and a decrease in the unemployment rate?',
+  'a',
+  'The participation ratio (or activity ratio) is the ratio of the labor force to total population of working age and the unemployment rate is the ratio of the number of unemployed to the labor force. Labor force is the numerator in the participation ratio and denominator in the unemployment rate. Therefore, assuming all else remains unchanged, an increase in the number of people included in the labor force would cause the participation ratio to increase and unemployment rate to decrease.',
+  'An increase in the number of people included in the labor force.',
+  'A decrease in the total population of working age people.',
+  'A decrease in the number of unemployed people.',
+  3
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  5,
+  'Corporate Finance',
+  'Cost of Capital',
+  'Using the debt-rating approach to find the cost of debt is most appropriate when market prices for a company’s debt are:',
+  'b',
+  'The debt-rating approach is used when the market prices for debt are unreliable or nonexistent.',
+  'stable.',
+  'unreliable.',
+  'below par value.',
+  1
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  4,
+  'Financial Statement Analysis',
+  'Long-Lived Assets',
+  'In 2015, a company undertook the following two transactions: 1. Borrowed money from an insurance company and pledged some of its production facilities as collateral for the loan. 2. Entered into an agreement with a local construction company to build a new research facility at a fixed price. Construction is to begin by 1 January 2016 and be completed by 31 December 2018. With respect to required disclosures in the company''s financial statements, which of the following is most accurate? If the company reports under:',
+  'c',
+  'Under US GAAP, neither transaction must be disclosed, but disclosure of both transactions is required under IFRS.',
+  'International Financial Reporting Standards (IFRS), neither transaction must be disclosed.',
+  'US GAAP, only the pledged borrowing must be disclosed.',
+  'US GAAP, neither transaction must be disclosed.',
+  1
+);
+
+INSERT INTO questions (
+    questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  11,
+  'Portfolio Management',
+  'Portfolio Risk and Return: Part II',
+  'Stock X and Stock Y have the same level of total risk. Stock X has twice the systematic risk of Stock Y and half its non-systematic risk. Stock X''s expected return will most likely be:',
+  'c',
+  'Because Stock X has a higher systematic risk level compared with Stock Y, its expected return will be higher than that of Stock Y.',
+  'lower than the expected return of Stock Y',
+  'the same as the expected return of Stock Y',
+  'higher than the expected return of Stock Y',
+  2
+);
+
+INSERT INTO questions (
+    questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  10,
+  'Portfolio Management',
+  'Basics of Portfolio Planning and Construction',
+  'The strategic asset allocation and portfolio rebalancing policy are most likely addressed in which section of an investment policy statement?',
+  'b',
+  'Information related to strategic asset allocation and portfolio rebalancing policy would be placed in the appendices of an investment policy statement.',
+  'Procedures',
+  'Appendices',
+  'Investment objectives',
+  1
 );

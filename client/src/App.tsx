@@ -1,35 +1,26 @@
-import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import React from 'react';
+import QuestionComponent from './QuestionComponent';
+
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+
+function Home() {
+  return <h1>Welcome! Please select a question.</h1>;
+}
 
 export default function App() {
-  const [serverData, setServerData] = useState('');
-
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    readServerData();
-  }, []);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{serverData}</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* 根路由 */}
+        <Route path="/" element={<Home />} />
+        {/* 修正的问题路由 - 添加前导斜线 */}
+        <Route
+          path="/question/:topicName/:questionNumber" // 统一使用 topicName
+          element={<QuestionComponent />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
