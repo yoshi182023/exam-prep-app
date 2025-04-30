@@ -1,6 +1,7 @@
 // QuestionComponent.tsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import TopicButtons from './TopicButtons';
 
 type Question = {
   questionNumber: number;
@@ -28,7 +29,6 @@ export default function QuestionComponent() {
     const fetchQuestions = async () => {
       if (!topicName || !questionNumber) return;
       setLoading(true);
-
       try {
         const response = await fetch(
           `/api/questions/topic/${topicName}/${questionNumber}`
@@ -38,9 +38,7 @@ export default function QuestionComponent() {
           throw new Error('Failed to fetch questions.');
         }
         const data = await response.json();
-        // 添加调试日志
         console.log('Received question data:', data);
-
         setCurrentQuestion(data); // Set the current question directly
       } catch (err) {
         console.error(err);
@@ -79,47 +77,16 @@ export default function QuestionComponent() {
   const isCorrect = selectedAnswer === currentQuestion.answer;
 
   return (
-    <div>
-      <div style={{ marginBottom: '20px' }}>
-        <h1>Topic: {topicName}</h1>
-        <h2>Question Number: {questionNumber}</h2>
-        {/* Navbar - topic buttons */}
-        <button
-          onClick={() =>
-            handleTopicChange('Ethical and Professional Standards')
-          }>
-          Ethical and Professional Standards
-        </button>
-        <button onClick={() => handleTopicChange('Quantitative Methods')}>
-          Quantitative Methods
-        </button>
-        <button onClick={() => handleTopicChange('Economics')}>
-          Economics
-        </button>
-        <button
-          onClick={() => handleTopicChange('Financial Statement Analysis')}>
-          Financial Statement Analysis
-        </button>
-        <button onClick={() => handleTopicChange('Corporate Finance')}>
-          Corporate Finance
-        </button>
-        <button onClick={() => handleTopicChange('Equity Investments')}>
-          Equity Investments
-        </button>
-        <button onClick={() => handleTopicChange('Derivative Investments')}>
-          Derivative Investments
-        </button>
-        <button onClick={() => handleTopicChange('Fixed Income Investments')}>
-          Fixed Income Investments
-        </button>
-        <button onClick={() => handleTopicChange('Alternative Investments')}>
-          Alternative Investments
-        </button>
-        <button onClick={() => handleTopicChange('Portfolio Management')}>
-          Portfolio Management
-        </button>
-      </div>
+    // <div>
+    //   <div style={{ marginBottom: '20px' }}>
+    //     <h1>Topic: {topicName}</h1>
+    //     <h2>Question Number: {questionNumber}</h2>
+    //     {/* Navbar - topic buttons */}
+    //
 
+    //   </div>
+    <div>
+      <TopicButtons onTopicChange={handleTopicChange} />
       <h3>{currentQuestion.question}</h3>
 
       <div>

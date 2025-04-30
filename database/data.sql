@@ -102,3 +102,122 @@ INSERT INTO questions (
   'Investment objectives',
   1
 );
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  20,
+  'Financial Statement Analysis',
+  'Financial Reporting Standards',
+  'According to the International Accounting Standards Board''s (IASB) Conceptual Framework for Financial Reporting, the two fundamental qualitative characteristics that make financial information useful are best described as:',
+  'a',
+  'Relevance and faithful representation are the two fundamental qualitative characteristics that make financial information useful, according to the IASB Conceptual Framework.',
+  'relevance and faithful representation.',
+  'understandability and verifiability.',
+  'timeliness and accrual accounting.',
+  3
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  90,
+  'Equity Investments',
+  'Market Efficiency',
+  'The behavioral bias in which investors tend to avoid realizing losses but rather seek to realize gains is best described as:',
+  'b',
+  'Behavioral biases in which investors tend to avoid realizing losses but, rather, seek to realize gains is the disposition effect.',
+  'the gambler’s fallacy.',
+  'the disposition effect.',
+  'mental accounting.',
+  1
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  92,
+  'Equity Investments',
+  'Market Organization and Structure',
+  'An investor writes a put option on FTSE 100 Index futures. Which of the following best describes',
+  'a',
+  'The investor has written a put contract, which means she is short the option. She, therefore, must satisfy the obligation to purchase the asset if requested to do so by the put owner. The investor has a long exposure to the risk of the underlying index future because she benefits when its quoted price increases—that is, when the put declines in value (or suffers a loss when its quoted price decreases as the put increases in value).',
+  'Short, long',
+  'Long, short',
+  'Short, short',
+  3
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  91,
+  'Equity Investments',
+  'Market Efficiency',
+  'A portfolio manager analyzes a market and discovers that it is not possible to achieve consistent and superior risk-adjusted returns, net of all expenses. This market is most likely characterized by:',
+  'c',
+  'In an informationally efficient market, consistent and superior risk-adjusted returns (net of all expenses) are not achievable.',
+  'restrictions on short selling',
+  'persistent anomalies',
+  'informational efficiency',
+  2
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  88,
+  'Alternative Investments',
+  'Introduction to Alternative Investments',
+  'Relative to traditional investments, alternative investments are best characterized as having:',
+  'b',
+  'Alternative investments are more likely characterized as having unique legal and tax considerations because of the broad range and complexity of the investments.',
+  'higher correlations with other asset classes',
+  'unique legal and tax considerations',
+  'greater liquidity',
+  1
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  77,
+  'Alternative Investments',
+  'Introduction to Alternative Investments',
+  'Alternative investments that rely on estimates rather than observable market prices for valuation purposes are most likely to report:',
+  'b',
+  'The use of estimates tends to smooth the return series. As a consequence, the volatility of returns will be understated.',
+  'returns that are understated',
+  'volatility of returns that is understated',
+  'correlations of returns with the returns of traditional assets that are overstated',
+  2
+);
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  211,
+  'Quantitative Methods',
+  'Hypothesis Testing',
+  'The discrepancy between a statistically significant result and an economically meaningful result is least likely the result of:',
+  'b',
+  'Sampling errors will result in statistical error. A statistically significant result might not be economically meaningful after an analyst accounts for the risk, transaction costs, and applicable taxes.',
+  'transaction costs',
+  'sampling errors',
+  'risk tolerance',
+  1
+);
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  212,
+  'Quantitative Methods',
+  'Hypothesis Testing',
+  'When testing a hypothesis, the power of a test is best described as the:',
+  'b',
+  'The power of a test is the probability of correctly rejecting the null hypothesis—that is, the probability of rejecting the null when it is false.',
+  'probability of rejecting a true null hypothesis.',
+  'probability of correctly rejecting the null hypothesis.',
+  'same as the level of significance of the test.',
+  2
+);
