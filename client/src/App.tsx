@@ -16,7 +16,7 @@ export default function App() {
       </Link>
       <Link to="/sign-in">Sign In</Link>
       <Link to="/question/Economics/3"> QuestionComponent</Link>
-      <Link to="/reviews">Review My Flashcards</Link> {/* ✅ 添加按钮 */}
+      <Link to="/reviews">Review My Flashcards</Link>
       <Navbar />
       <Routes>
         {/* 根路由 */}
@@ -27,7 +27,7 @@ export default function App() {
           path="/question/:topicName/:questionNumber" // 统一使用 topicName
           element={<QuestionComponent />}
         />
-        <Route path="/reviews" element={<ReviewPage />} /> {/* ✅ 添加新路由 */}
+        <Route path="/reviews" element={<ReviewPage />} />
         {/* <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} /> */}
