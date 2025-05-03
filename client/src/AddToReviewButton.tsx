@@ -4,7 +4,7 @@ import { useUser } from './UserContext'; // 用于获取当前登录用户
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  questionid: number; // 或者 losId，根据你的数据库设计
+  questionid: number;
   topic: string;
 };
 
@@ -18,7 +18,7 @@ export default function AddToReviewButton({ topic, questionid }: Props) {
         'You must be logged in to add this question to your review. Do you want to sign in now?'
       );
       if (shouldLogin) {
-        navigate('/sign-in'); // 根据你的路径修改
+        navigate('/sign-in');
       }
       return;
     }
@@ -45,39 +45,6 @@ export default function AddToReviewButton({ topic, questionid }: Props) {
       alert('Failed to add this question. Please try again later.');
     }
   };
-  // const handleClick = async () => {
-  //   if (!user) {
-  //     const shouldLogin = window.confirm(
-  //       'You must be logged in to add this question to your review. Do you want to sign in now?'
-  //     );
-  //     if (shouldLogin) {
-  //       navigate('/sign-in'); // 根据你的路径修改
-  //     }
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetch('/api/review', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${user.token}`, // token 存在于 UserContext 中
-  //       },
-  //       body: JSON.stringify({ topic, questionid }),
-  //     });
-
-  //     if (response.ok) {
-  //       alert('This question was added to your review list!');
-  //     } else if (response.status === 409) {
-  //       alert('This question is already in your review list.');
-  //     } else {
-  //       throw new Error('Unexpected error');
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to add to review:', error);
-  //     alert('Failed to add this question. Please try again later.');
-  //   }
-  // };
 
   return (
     <button
