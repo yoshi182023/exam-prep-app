@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopicButtons from './TopicButtons';
+import AddToReviewButton from './AddToReviewButton';
+import { useUser } from './UserContext'; // 用于获取当前登录用户
 
 type Question = {
   questionNumber: number;
@@ -12,9 +14,12 @@ type Question = {
   answer: string;
   explanation: string;
   topic?: string; // 添加这个字段以匹配后端
+  questionid: number;
 };
 
-export default function QuestionComponent() {
+export default function QuestionComponent({ topic, questionid }) {
+  const { user } = useUser();
+  console.log(user);
   const navigate = useNavigate();
   const { topicName, questionNumber } = useParams();
   console.log('topic:', topicName);
@@ -75,7 +80,8 @@ export default function QuestionComponent() {
   if (loading || !currentQuestion) return <div>Loading...</div>;
 
   const isCorrect = selectedAnswer === currentQuestion.answer;
-
+  console.log(topic);
+  console.log(questionid);
   return (
     // <div>
     //   <div style={{ marginBottom: '20px' }}>
@@ -115,7 +121,11 @@ export default function QuestionComponent() {
 
       <div className="actions" style={{ marginTop: '20px' }}>
         <div className="actions" style={{ marginTop: '20px' }}>
-          <button onClick={handleSkip}>Add LOS to Review</button>
+          <AddToReviewButton
+            questionid={currentQuestion.questionid}
+            topic={currentQuestion.topic}
+          />
+
           <button onClick={handleSkip}>Skip</button>
         </div>
       </div>

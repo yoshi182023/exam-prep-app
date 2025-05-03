@@ -221,3 +221,6 @@ INSERT INTO questions (
   'same as the level of significance of the test.',
   2
 );
+
+INSERT INTO "users" ("username", "email", "passwordHash")
+VALUES ('ross_nelson', 'ross@example.com', 'abc123');
