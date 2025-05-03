@@ -23,7 +23,7 @@ CREATE TABLE "users" (
   "username" text,
   "email" text,
   "passwordHash" text,
-  "createdAt" timestamptz
+  "createdAt" timestamptz DEFAULT now()
 );
 
 CREATE TABLE "userAnswers" (
