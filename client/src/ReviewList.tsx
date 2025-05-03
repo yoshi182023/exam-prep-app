@@ -5,7 +5,7 @@ type ReviewItem = {
   questionid: number;
   los: string;
   explanation: string;
-  created_at: string;
+  addedAt: string;
 };
 
 type Props = {
@@ -16,6 +16,7 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
   const { user } = useUser();
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null); // null = list view
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -29,11 +30,7 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
       });
 
       const data = await res.json();
-      // if (!Array.isArray(data)) {
-      //   console.error('Expected array, got:', data);
-      //   return [];
-      // }
-      //return data;
+      console.log('Fetched data:', data);
 
       setReviews(data);
       setLoading(false);
@@ -46,20 +43,60 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
   if (reviews.length === 0)
     return <div>No reviews found for topic: {topic}</div>;
 
+  // === Card View ===
+  if (currentIndex !== null) {
+    const review = reviews[currentIndex];
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
+        <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-xl">
+          <h2 className="text-xl font-bold mb-2">Topic: {review.topic}</h2>
+          <div className="mb-4">
+            <strong>LOS:</strong> {review.los}
+          </div>
+          <div className="mb-4">
+            <strong>Explanation:</strong> {review.explanation}
+          </div>
+          <div className="text-sm text-gray-500 mb-4">
+            Saved on: {new Date(review.addedAt).toLocaleDateString()}
+          </div>
+          <div className="flex justify-between">
+            <button
+              onClick={() => setCurrentIndex(null)}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded">
+              Exit
+            </button>
+            <button
+              onClick={() => {
+                if (currentIndex < reviews.length - 1) {
+                  setCurrentIndex(currentIndex + 1);
+                } else {
+                  setCurrentIndex(null); // if last, return to list
+                }
+              }}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+              {currentIndex < reviews.length - 1 ? 'Next' : 'Finish'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // === List View ===
   return (
-    <div>
+    <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Review List for "{topic}"</h2>
       <ul className="space-y-4">
-        {reviews.map((item) => (
-          <li key={item.questionid} className="border p-4 rounded shadow">
+        {reviews.map((item, idx) => (
+          <li
+            key={item.questionid}
+            className="border p-4 rounded shadow cursor-pointer hover:bg-gray-50"
+            onClick={() => setCurrentIndex(idx)}>
             <div>
               <strong>LOS:</strong> {item.los}
             </div>
-            <div>
-              <strong>Explanation:</strong> {item.explanation}
-            </div>
             <div className="text-sm text-gray-500">
-              Added: {new Date(item.created_at).toLocaleDateString()}
+              Saved on: {new Date(item.addedAt).toLocaleDateString()}
             </div>
           </li>
         ))}

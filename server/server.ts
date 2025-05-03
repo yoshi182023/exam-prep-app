@@ -103,7 +103,7 @@ app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
 
     const result = await db.query(
       `
-       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt" AS "created_at"
+       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt"
   FROM "userReviews" ur
   JOIN "questions" q ON ur."questionid" = q."questionid"
   WHERE ur."userid" = $1 AND q."topic" = $2
