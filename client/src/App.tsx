@@ -17,7 +17,7 @@ export default function App() {
       <Link to="/sign-in">Sign In</Link>
       <Link to="/question/Economics/3"> QuestionComponent</Link>
       <Link to="/reviews">Review My Flashcards</Link>
-      <Navbar />
+
       <Routes>
         {/* 根路由 */}
         <Route path="/" element={<Home />} />
@@ -32,6 +32,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} /> */}
       </Routes>
+      <Navbar />
     </BrowserRouter>
   );
 }
