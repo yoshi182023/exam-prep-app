@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TopicNavbar from './TopicNavbar';
 import ReviewList from './ReviewList';
 

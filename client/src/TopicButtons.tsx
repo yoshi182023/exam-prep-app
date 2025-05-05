@@ -1,5 +1,4 @@
 // src/components/TopicButtons.tsx
-import React from 'react';
 
 type TopicButtonsProps = {
   onTopicChange: (topic: string) => void;

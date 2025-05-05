@@ -14,5 +14,5 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": ["."]
+  "include": [".", "../client/src/Reviewlist.tsx"]
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import QuestionComponent from './QuestionComponent';
 import Home from './Home';
 import { Routes, Route } from 'react-router-dom';
