@@ -22,7 +22,7 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
     const fetchReviews = async () => {
       setLoading(true);
       // const token = localStorage.getItem('token');
-      const token = user.token;
+      const token = user?.token;
       const res = await fetch(`/api/reviews/${topic}`, {
         headers: {
           Authorization: `Bearer ${token}`,

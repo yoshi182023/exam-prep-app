@@ -1,12 +1,9 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <div className="navbar">
-      <NavLink
-        className={({ isActive }) => (isActive ? 'active' : undefined)}
-        to="/">
+      {/* <NavLink className={isActive ? 'active' : undefined} to="/">
         home
       </NavLink>
       <NavLink
@@ -18,13 +15,9 @@ const Navbar = () => {
         className={({ isActive }) => (isActive ? 'active' : undefined)}
         to="login">
         login
-      </NavLink>
+      </NavLink> */}
 
-      <NavLink
-        className={({ isActive }) => (isActive ? 'active' : undefined)}
-        to="profile">
-        Search Questions
-      </NavLink>
+      <NavLink to="profile">Search Questions</NavLink>
     </div>
   );
 };

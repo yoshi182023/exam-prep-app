@@ -1,5 +1,5 @@
 // QuestionComponent.tsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopicButtons from './TopicButtons';
 import AddToReviewButton from './AddToReviewButton';
@@ -17,13 +17,14 @@ type Question = {
   questionid: number;
 };
 
-export default function QuestionComponent({ topic, questionid }) {
+export default function QuestionComponent() {
   const { user } = useUser();
   console.log(user);
   const navigate = useNavigate();
   const { topicName, questionNumber } = useParams();
   console.log('topic:', topicName);
   console.log('questionNumber:', questionNumber);
+
   //const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -80,8 +81,7 @@ export default function QuestionComponent({ topic, questionid }) {
   if (loading || !currentQuestion) return <div>Loading...</div>;
 
   const isCorrect = selectedAnswer === currentQuestion.answer;
-  console.log(topic);
-  console.log(questionid);
+
   return (
     <div>
       <TopicButtons onTopicChange={handleTopicChange} />
@@ -115,7 +115,7 @@ export default function QuestionComponent({ topic, questionid }) {
         <div className="actions" style={{ marginTop: '20px' }}>
           <AddToReviewButton
             questionid={currentQuestion.questionid}
-            topic={currentQuestion.topic}
+            topic={currentQuestion.topic ?? ''}
           />
 
           <button onClick={handleSkip}>Skip</button>
