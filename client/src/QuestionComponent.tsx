@@ -83,14 +83,6 @@ export default function QuestionComponent({ topic, questionid }) {
   console.log(topic);
   console.log(questionid);
   return (
-    // <div>
-    //   <div style={{ marginBottom: '20px' }}>
-    //     <h1>Topic: {topicName}</h1>
-    //     <h2>Question Number: {questionNumber}</h2>
-    //     {/* Navbar - topic buttons */}
-    //
-
-    //   </div>
     <div>
       <TopicButtons onTopicChange={handleTopicChange} />
       <h3>{currentQuestion.question}</h3>

@@ -186,8 +186,8 @@ app.post('/api/review', authMiddleware, async (req, res, next) => {
 
     const result = await db.query(
       `
-      INSERT INTO "userReviews" ("userid", "questionid")
-      VALUES ($1, $2)
+      INSERT INTO "userReviews" ("userid", "questionid", "addedAt")
+      VALUES($1, $2, NOW());
       RETURNING *;
       `,
       [userid, questionid]

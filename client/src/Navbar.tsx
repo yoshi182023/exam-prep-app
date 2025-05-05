@@ -23,7 +23,7 @@ const Navbar = () => {
       <NavLink
         className={({ isActive }) => (isActive ? 'active' : undefined)}
         to="profile">
-        profile
+        Search Questions
       </NavLink>
     </div>
   );

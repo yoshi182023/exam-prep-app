@@ -103,6 +103,7 @@ INSERT INTO questions (
   1
 );
 
+
 INSERT INTO questions (
   questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
 ) VALUES (
@@ -222,5 +223,95 @@ INSERT INTO questions (
   2
 );
 
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  2020213,
+  'Quantitative Methods',
+  'Probability Concepts',
+  'The probability of Event A is 40%. The probability of Event B is 60%. The joint
+probability of AB is 40%. The probability (P) that A or B occurs, or both occur,
+is closest to:',
+  'c',
+  'C is correct. P(A or B) = P(A) + P(B) − P(AB) = 0.40 + 0.60 − 0.40 = 0.60 or 60%.
+A is incorrect because it uses only the joint probability of 40%.
+B is incorrect; it is obtained by adding 0.60 and 0.24 (0.60 × 0.40) = 0.84.',
+  'A 40%.',
+  'B 84%.',
+  'C 60%.',
+  3
+  );
+
+INSERT INTO questions (
+   questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+
+) VALUES (
+  701,
+  'Ethical and Professional Standards',
+  'The GIPS Standards',
+  'After a firm presents a minimum required number of years of GIPS-compliant performance, the firm must present an additional year of performance each year, building up to a minimum of:',
+  'a',
+  'After a firm presents a minimum of five years of GIPS-compliant performance, the firm must present an additional year of performance each year, building up to a minimum of 10 years of GIPS-compliant performance. B is incorrect. The initial period is five years of GIPS-compliant performance, building up to a minimum of 10 years of GIPS-compliant performance. C is incorrect. An additional year of performance each year is added building up to a minimum of 10 years of GIPS-compliant performance.',
+  '10 years of GIPS-compliant performance.',
+  '5 years of GIPS-compliant performance.',
+  '15 years of GIPS-compliant performance.',
+  3
+  );
+
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  20201701,
+  'Ethical and Professional Standards',
+  'Introduction to the Global Investment Performance Standards (GIPS)',
+  'According to the GIPS standards, a verification report confirms all of the fol-
+  lowing except whether:',
+  'a',
+  'According to the Global Investment Performance Standards (GIPS), verification
+  does not ensure the accuracy of any specific composite presentations. Verification tests
+  if a firm has properly constructed composites, and if the firm’s systems are designed
+  to properly calculate and present performance in compliance with the GIPS standards.
+  Verification does not, in any way, provide assurance about the results of a specific com-
+  posite. That level of assurance is provided through an additional level of testing of a
+  specific composite, called a performance examination or performance audit.
+  B is incorrect because GIPS verification confirms that a firm has complied with all
+  firm-wide composite construction requirements.
+  C is incorrect because GIPS verification confirms that a firm’s processes and procedures
+  are designed to calculate and present compliant performance results.',
+  'specific composite presentations are accurate.',
+  'a firm has complied with all firm-wide composite construction requirements.',
+  'processes and procedures are designed to calculate and present compliant performance results.',
+  4);
+
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  20201702,
+  'Ethical and Professional Standards',
+  'Ethics and Trust in the Investment Profession',
+  'If you are seeking guidance from the firm’s code of ethics or written policies,
+your actions most likely reflect which phase of an ethical decision-­ making
+framework?',
+  'c',
+  'If you are seeking guidance from the firm’s code of ethics or written policies,
+you are in the Consider phase of the ethical decision-­ making framework. This phase
+involves taking time to consider the situation influences as well as personal behavioral biases that could affect your thinking and decision making. During this phase, you may
+also seek guidance from such trusted sources as the firm''s compliance department or
+outside counsel. A is incorrect. The Decide phase of the ethical decision-­ making framework does not
+involve seeking guidance from the firm’s code of ethics or written policies.
+B is incorrect. The Reflect phase of the ethical decision-­ making framework does not
+involve seeking guidance from the firm’s code of ethics or written policies but rather
+reflecting on and assessing your decision and its outcome.',
+  'Decide',
+  'Reflect',
+  'Consider',
+  5
+
+);
+
 INSERT INTO "users" ("username", "email", "passwordHash")
 VALUES ('ross_nelson', 'ross@example.com', 'abc123');
+
+ALTER TABLE "userReviews"
+ALTER COLUMN "addedAt"
+SET DEFAULT NOW();
