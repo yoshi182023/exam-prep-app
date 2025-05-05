@@ -222,5 +222,25 @@ INSERT INTO questions (
   2
 );
 
+INSERT INTO questions (
+   questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+
+) VALUES (
+  701,
+  'Ethical and Professional Standards',
+  'The GIPS Standards',
+  'After a firm presents a minimum required number of years of GIPS-compliant performance, the firm must present an additional year of performance each year, building up to a minimum of:',
+  'a',
+  'After a firm presents a minimum of five years of GIPS-compliant performance, the firm must present an additional year of performance each year, building up to a minimum of 10 years of GIPS-compliant performance. B is incorrect. The initial period is five years of GIPS-compliant performance, building up to a minimum of 10 years of GIPS-compliant performance. C is incorrect. An additional year of performance each year is added building up to a minimum of 10 years of GIPS-compliant performance.',
+  '10 years of GIPS-compliant performance.',
+  '5 years of GIPS-compliant performance.',
+  '15 years of GIPS-compliant performance.',
+  5
+  );
+
 INSERT INTO "users" ("username", "email", "passwordHash")
 VALUES ('ross_nelson', 'ross@example.com', 'abc123');
+
+ALTER TABLE "userReviews"
+ALTER COLUMN "addedAt"
+SET DEFAULT NOW();

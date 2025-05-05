@@ -5,7 +5,7 @@ type ReviewItem = {
   questionid: number;
   los: string;
   explanation: string;
-  addedAt: string;
+  created_at: string;
 };
 
 type Props = {
@@ -57,7 +57,8 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
             <strong>Explanation:</strong> {review.explanation}
           </div>
           <div className="text-sm text-gray-500 mb-4">
-            Saved on: {new Date(review.addedAt).toLocaleDateString()}
+            Saved on:
+            {new Date(review.created_at as string).toLocaleDateString('en-US')}
           </div>
           <div className="flex justify-between">
             <button
@@ -88,16 +89,14 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
       <h2 className="text-xl font-bold mb-4">Review List for "{topic}"</h2>
       <ul className="space-y-4">
         {reviews.map((item, idx) => (
-          <li
-            key={item.questionid}
-            className="border p-4 rounded shadow cursor-pointer hover:bg-gray-50"
-            onClick={() => setCurrentIndex(idx)}>
+          <li key={item.questionid} onClick={() => setCurrentIndex(idx)}>
             <div>
               <strong>LOS:</strong> {item.los}
             </div>
             <div className="text-sm text-gray-500">
-              Saved on: {new Date(item.addedAt).toLocaleDateString()}
+              Saved on: {new Date(item.created_at).toLocaleDateString()}
             </div>
+            <button> Delete </button>
           </li>
         ))}
       </ul>

@@ -103,7 +103,7 @@ app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
 
     const result = await db.query(
       `
-       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt"
+       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt" AS "created_at"
   FROM "userReviews" ur
   JOIN "questions" q ON ur."questionid" = q."questionid"
   WHERE ur."userid" = $1 AND q."topic" = $2
@@ -186,8 +186,8 @@ app.post('/api/review', authMiddleware, async (req, res, next) => {
 
     const result = await db.query(
       `
-      INSERT INTO "userReviews" ("userid", "questionid")
-      VALUES ($1, $2)
+      INSERT INTO "userReviews" ("userid", "questionid", "addedAt")
+      VALUES($1, $2, NOW());
       RETURNING *;
       `,
       [userid, questionid]
