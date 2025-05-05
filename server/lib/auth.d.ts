@@ -6,7 +6,7 @@ declare global {
     export interface Request {
       /** `User` object populated by `authMiddleware`. */
       user?: {
-        userId: number;
+        userid: number;
       };
     }
   }

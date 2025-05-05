@@ -97,8 +97,6 @@ app.get(
 );
 app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
   try {
-    const { userid } = req.user;
-
     const topic = req.params.topic;
 
     const result = await db.query(
@@ -109,7 +107,7 @@ app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
   WHERE ur."userid" = $1 AND q."topic" = $2
   ORDER BY ur."addedAt" DESC
       `,
-      [userid, topic]
+      [req.user?.userid, topic]
     );
 
     res.json(result.rows);
@@ -175,7 +173,7 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
 
 app.post('/api/review', authMiddleware, async (req, res, next) => {
   try {
-    const { userid } = req.user;
+    //  const { userid } = req.user;
     console.log('req.user =', req.user);
 
     const { questionid } = req.body;
@@ -187,10 +185,10 @@ app.post('/api/review', authMiddleware, async (req, res, next) => {
     const result = await db.query(
       `
       INSERT INTO "userReviews" ("userid", "questionid", "addedAt")
-      VALUES($1, $2, NOW());
+      VALUES($1, $2, NOW())
       RETURNING *;
       `,
-      [userid, questionid]
+      [req.user?.userid, questionid]
     );
 
     res.status(201).json(result.rows[0] || { message: 'Already added' });
