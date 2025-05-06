@@ -11,9 +11,9 @@ export type Question = {
   a: string;
   b: string;
   c: string;
-  answer: string;
+  answer: 'a' | 'b' | 'c';
   explanation: string;
-  topic?: string; // 添加这个字段以匹配后端
+  topic: string; // 添加这个字段以匹配后端
   questionid: number;
 };
 
@@ -118,7 +118,6 @@ export default function QuestionComponent() {
           Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify({
-          userid: user.userid,
           questionid: currentQuestion.questionid,
           selectedAnswer: choice,
           isCorrect,

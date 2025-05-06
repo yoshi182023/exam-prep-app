@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react';
 import { useUser } from './UserContext';
 
 import type { Question } from './QuestionComponent';
-
+export type Answer = Question & {
+  answerid: number;
+  selectedAnswer: 'a' | 'b' | 'c';
+  isCorrect: boolean;
+  answeredAt: string;
+  los: string;
+};
 export default function WrongAnswersPage() {
-  const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
-  const [filteredAnswers, setFilteredAnswers] = useState<Question[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<Answer[]>([]);
+  const [filteredAnswers, setFilteredAnswers] = useState<Answer[]>([]);
   const [topics, setTopics] = useState<string[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
   const [loading, setLoading] = useState(true);
@@ -30,7 +36,7 @@ export default function WrongAnswersPage() {
           throw new Error(`HTTP error ${response.status}`);
         }
 
-        const data = await response.json();
+        const data = (await response.json()) as Answer[];
         const seen = new Set();
         const uniqueAnswers = data.filter((item) => {
           if (seen.has(item.questionid)) return false;
@@ -41,7 +47,7 @@ export default function WrongAnswersPage() {
         setWrongAnswers(uniqueAnswers);
 
         // 提取 topic 列表
-        const topicSet = new Set(uniqueAnswers.map((q) => q.topic));
+        const topicSet = new Set<string>(uniqueAnswers.map((q) => q.topic));
         setTopics(['all', ...Array.from(topicSet)]);
         setFilteredAnswers(uniqueAnswers); // 初始显示全部
       } catch (error) {

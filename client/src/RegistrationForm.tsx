@@ -31,7 +31,7 @@ export function RegistrationForm() {
         throw new Error(`fetch Error ${res.status}`);
       }
 
-      const user = (await res.json()) as User;
+      const user = (await res.json()) as User['user'];
       console.log('Registered', user);
       alert(
         `Successfully registered ${user.username} as userId ${user.userid}.`

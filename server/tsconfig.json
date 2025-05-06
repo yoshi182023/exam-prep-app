@@ -14,5 +14,9 @@
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": [".", "../client/src/Reviewlist.tsx"]
+  "include": [
+    ".",
+    "../client/src/Reviewlist.tsx",
+    "../client/src/WrongAnswersPage.tsx"
+  ]
 }

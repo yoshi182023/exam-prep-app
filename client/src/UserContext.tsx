@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type User = {
-  userid: number;
-  username: string;
-  email: string;
+  user: {
+    userid: number;
+    username: string;
+    email: string;
+  };
   token: string;
 };
 
