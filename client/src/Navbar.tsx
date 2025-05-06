@@ -1,25 +1,11 @@
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+function Navbar() {
   return (
     <div className="navbar">
-      {/* <NavLink className={isActive ? 'active' : undefined} to="/">
-        home
-      </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? 'active' : undefined)}
-        to="dashboard">
-        dashboard
-      </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? 'active' : undefined)}
-        to="login">
-        login
-      </NavLink> */}
-
-      <NavLink to="profile">Search Questions</NavLink>
+      <NavLink to="search">Search Questions</NavLink>
     </div>
   );
-};
+}
 
 export default Navbar;

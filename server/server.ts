@@ -32,6 +32,36 @@ app.use(express.json());
 //   res.json({ message: 'Hello, World!' });
 // });
 // GET /api/questions
+app.get('/api/questions/search', async (req, res, next) => {
+  try {
+    const { q, limit = 20 } = req.query;
+    console.log(req.query); // 检查 query 参数到底长啥样
+
+    if (!q || typeof q !== 'string') {
+      return res
+        .status(400)
+        .json({ error: 'Missing or invalid query parameter: q' });
+    }
+    const keyword = `%${q}%`; // 模糊匹配
+    const sql = `
+      SELECT *
+      FROM "questions"
+      WHERE "question" ILIKE $1
+         OR "los" ILIKE $1
+         OR "explanation" ILIKE $1
+      ORDER BY "questionNumber"
+      LIMIT $2;
+    `;
+
+    const result = await db.query(sql, [keyword, limit]);
+    console.log(result);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err); // 👈 看这里打印了什么
+
+    next(err);
+  }
+});
 app.get('/api/questions', async (req, res, next) => {
   try {
     const sql = `
@@ -46,6 +76,7 @@ app.get('/api/questions', async (req, res, next) => {
     next(err);
   }
 });
+
 app.get('/api/questions/:questionNumber', async (req, res, next) => {
   try {
     const { questionNumber } = req.params;

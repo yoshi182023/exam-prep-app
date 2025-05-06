@@ -8,6 +8,8 @@ import SignInPage from './SignInPage';
 import { RegistrationForm } from './RegistrationForm';
 import ReviewPage from './ReviewPage';
 import WrongAnswersPage from './WrongAnswersPage';
+import SearchQuestions from './SearchQuestions';
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -15,7 +17,7 @@ export default function App() {
         Home
       </Link>
       <Link to="/sign-in">Sign In</Link>
-      <Link to="/question/Economics/3"> QuestionComponent</Link>
+      <Link to="/question/Economics/1"> QuestionComponent</Link>
       <Link to="/reviews">Review My Flashcards</Link>
       <Link to="/wrong-answers">Mistakes</Link>
 
@@ -30,7 +32,7 @@ export default function App() {
         />
         <Route path="/reviews" element={<ReviewPage />} />
         <Route path="/wrong-answers" element={<WrongAnswersPage />} />{' '}
-        {/* ✅ 新增 */}
+        <Route path="/search" element={<SearchQuestions />} />
       </Routes>
       <Navbar />
     </BrowserRouter>

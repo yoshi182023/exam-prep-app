@@ -53,6 +53,7 @@
   "dependencies": {
     "argon2": "^0.43.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "react-router-dom": "^7.5.3"
   }
 }
