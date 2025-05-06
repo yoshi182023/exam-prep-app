@@ -282,7 +282,22 @@ INSERT INTO questions (
   'a firm has complied with all firm-wide composite construction requirements.',
   'processes and procedures are designed to calculate and present compliant performance results.',
   4);
-
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  2020214,
+  'Quantitative Methods',
+  'Organizing, Visualizing, and Describing Data',
+  'A graphical depiction of a continuous distribution shows the left tail to be longer than the right tail. The distribution is best described as having:',
+  'a',
+  'A is correct. A negatively skewed distribution appears as if the left tail has been pulled away from the mean. The average magnitude of negative deviations from the mean is larger than the average magnitude of positive deviations.
+B is incorrect. Kurtosis refers to relative peakedness of a distribution; leptokurtosis means more peaked than normal.
+C is incorrect. A negatively skewed distribution appears as if the left tail has been pulled away from the mean.',
+  'A negative skewness.',
+  'B leptokurtosis.',
+  'C positive skewness.',
+  4
+);
 INSERT INTO questions (
   "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
 ) VALUES (

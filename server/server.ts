@@ -190,15 +190,66 @@ app.post('/api/review', authMiddleware, async (req, res, next) => {
       `,
       [req.user?.userid, questionid]
     );
-
     res.status(201).json(result.rows[0] || { message: 'Already added' });
+  } catch (err) {
+    next(err);
+  }
+});
+app.post('/api/answers', authMiddleware, async (req, res, next) => {
+  try {
+    const userid = req.user?.userid;
+    const { questionid, selectedAnswer, isCorrect } = req.body;
+    console.log('Received answer:', req.body);
+
+    if (!userid) {
+      throw new ClientError(401, 'User not authenticated');
+    }
+
+    if (!questionid || !selectedAnswer || typeof isCorrect !== 'boolean') {
+      throw new ClientError(400, 'Missing or invalid input');
+    }
+
+    const result = await db.query(
+      `
+      INSERT INTO "userAnswers" ("userid", "questionid", "selectedAnswer", "isCorrect", "answeredAt")
+      VALUES ($1, $2, $3, $4, NOW())
+      RETURNING *;
+      `,
+      [userid, questionid, selectedAnswer, isCorrect]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+app.get('/api/wrong-answers', authMiddleware, async (req, res, next) => {
+  console.log('Received request for /api/wrong-answers');
+  console.log('Authorization header:', req.headers.authorization);
+  try {
+    const userid = req.user?.userid;
+
+    if (!userid) {
+      throw new ClientError(401, 'User not authenticated');
+    }
+
+    const sql = `
+  SELECT *
+        FROM "userAnswers" ua
+        JOIN "questions" q ON ua."questionid" = q."questionid"
+       WHERE ua."userid" = $1
+         AND ua."isCorrect" = false
+      ORDER BY ua."answeredAt" DESC
+    `;
+
+    const result = await db.query(sql, [userid]);
+    res.json(result.rows);
   } catch (err) {
     next(err);
   }
 });
 
 /** ---------------------- 原有的 questions 接口保留不动 ---------------------- **/
-
 /*
  * Handles paths that aren't handled by any other route handler.
  * It responds with `index.html` to support page refreshes with React Router.

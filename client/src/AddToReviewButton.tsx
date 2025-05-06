@@ -41,7 +41,7 @@ export default function AddToReviewButton({ topic, questionid }: Props) {
       }
     } catch (error) {
       console.error('Failed to add to review:', error);
-      alert('Failed to add this question. Please try again later.');
+      alert('Failed to add this question. Did you sign in?');
     }
   };
 

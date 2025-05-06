@@ -26,7 +26,7 @@ export default function SignInPage() {
 
       const user = await res.json();
       setUser(user);
-      navigate('/');
+      navigate('/wrong-answers');
     } catch (err) {
       alert(`Error signing in: ${err}`);
     }

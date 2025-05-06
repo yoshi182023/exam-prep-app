@@ -62,10 +62,78 @@ export default function QuestionComponent() {
     }
   }, [questionNumber]);
 
+  // async function sendAnswerToServer() {
+  //   if (!user?.userid || !currentQuestion || !selectedAnswer) return;
+  //   try {
+  //     const res = await fetch('/api/answer', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+
+  //       body: JSON.stringify({
+  //         questionid: currentQuestion.questionid,
+  //         selectedAnswer,
+  //         isCorrect,
+  //       }),
+  //     });
+  //     if (!res.ok) {
+  //       throw new Error('Failed to save answer.');
+  //     }
+  //     const data = await res.json();
+  //     console.log('Answer saved:', data);
+  //   } catch (error) {
+  //     console.error('Error saving answer:', error);
+  //   }
+  // }
+
   function handleAnswerClick(choice: string) {
-    if (showExplanation) return;
+    if (showExplanation || !currentQuestion) return;
+    const isCorrect = choice === currentQuestion?.answer;
     setSelectedAnswer(choice);
     setShowExplanation(true);
+    // 发给后端
+    sendAnswerToServerHelper(choice, isCorrect);
+  }
+  async function sendAnswerToServerHelper(choice: string, isCorrect: boolean) {
+    const userid = user?.user?.userid;
+    console.log('user:', user);
+    console.log('currentQuestion:', currentQuestion);
+    if (!userid || !currentQuestion) {
+      console.warn('Missing user or question info');
+      return;
+    }
+    try {
+      console.log('Sending answer to server:', {
+        userid,
+        questionid: currentQuestion.questionid,
+        selectedAnswer: choice,
+        isCorrect,
+      });
+
+      const res = await fetch('/api/answers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          userid: user.userid,
+          questionid: currentQuestion.questionid,
+          selectedAnswer: choice,
+          isCorrect,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to save answer. Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('✅ Answer saved successfully:', data);
+    } catch (error) {
+      console.error('❌ Error sending answer:', error);
+    }
   }
 
   function handleSkip() {

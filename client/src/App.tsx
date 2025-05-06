@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import SignInPage from './SignInPage';
 import { RegistrationForm } from './RegistrationForm';
 import ReviewPage from './ReviewPage';
+import WrongAnswersPage from './WrongAnswersPage';
 export default function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ export default function App() {
       <Link to="/sign-in">Sign In</Link>
       <Link to="/question/Economics/3"> QuestionComponent</Link>
       <Link to="/reviews">Review My Flashcards</Link>
+      <Link to="/wrong-answers">wrong answers</Link>
 
       <Routes>
         {/* 根路由 */}
@@ -27,9 +29,8 @@ export default function App() {
           element={<QuestionComponent />}
         />
         <Route path="/reviews" element={<ReviewPage />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/wrong-answers" element={<WrongAnswersPage />} />{' '}
+        {/* ✅ 新增 */}
       </Routes>
       <Navbar />
     </BrowserRouter>
