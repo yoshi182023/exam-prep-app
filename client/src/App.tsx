@@ -17,7 +17,7 @@ export default function App() {
       <Link to="/sign-in">Sign In</Link>
       <Link to="/question/Economics/3"> QuestionComponent</Link>
       <Link to="/reviews">Review My Flashcards</Link>
-      <Link to="/wrong-answers">wrong answers</Link>
+      <Link to="/wrong-answers">Mistakes</Link>
 
       <Routes>
         {/* 根路由 */}

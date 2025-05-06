@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from './UserContext';
+
 type ReviewItem = {
   topic: string;
   questionid: number;
@@ -50,7 +51,7 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
       <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
         <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-xl">
           <h2 className="text-xl font-bold mb-2">Topic: {review.topic}</h2>
-          <div className="mb-4">
+          <div>
             <strong>LOS:</strong> {review.los}
           </div>
           <div className="mb-4">
@@ -90,13 +91,15 @@ const ReviewList: React.FC<Props> = ({ topic }) => {
       <ul className="space-y-4">
         {reviews.map((item, idx) => (
           <li key={item.questionid} onClick={() => setCurrentIndex(idx)}>
-            <div>
-              <strong>LOS:</strong> {item.los}
+            <div className="review-card">
+              <div>
+                <strong>LOS:</strong> {item.los}
+              </div>
+              <div className="text-sm text-gray-500">
+                Saved on: {new Date(item.created_at).toLocaleDateString()}
+              </div>
+              <button> Delete </button>{' '}
             </div>
-            <div className="text-sm text-gray-500">
-              Saved on: {new Date(item.created_at).toLocaleDateString()}
-            </div>
-            <button> Delete </button>
           </li>
         ))}
       </ul>

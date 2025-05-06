@@ -5,7 +5,7 @@ import TopicButtons from './TopicButtons';
 import AddToReviewButton from './AddToReviewButton';
 import { useUser } from './UserContext'; // 用于获取当前登录用户
 
-type Question = {
+export type Question = {
   questionNumber: number;
   question: string;
   a: string;

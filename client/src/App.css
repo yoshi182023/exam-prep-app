@@ -6,10 +6,60 @@
 }
 
 .card {
-  border-bottom: 2px dashed #3c51bb;
-  padding: 20px;
+  border-bottom: 2px dashed #bb3c3c;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: #51a7bd20;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ReviewList.css */
+
+.review-card {
+  border: 2px dashed #edf6f1e4;
+  border-radius: 12px;
+  padding: 19px;
+  background-color: rgba(140, 176, 134, 0.164);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+.review-card:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-4px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .logo:hover {
@@ -201,24 +251,6 @@ select:focus {
 
 .goals-section {
   padding-top: var(--space-md);
-}
-
-#goals-container {
-  display: grid;
-  gap: var(--space-md);
-}
-
-.goal-card {
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  background-color: white;
-  border-left: 4px solid var(--primary);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-}
-
-.goal-card:hover {
-  box-shadow: var(--shadow-md);
 }
 
 .goal-card.achieved {

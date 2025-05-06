@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useUser } from './UserContext'; // 用于获取当前登录用户
+import { useUser } from './UserContext';
+
+import type { Question } from './QuestionComponent';
 
 export default function WrongAnswersPage() {
   const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
+  const [filteredAnswers, setFilteredAnswers] = useState<Question[]>([]);
+  const [topics, setTopics] = useState<string[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState<string>('all');
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
+
   useEffect(() => {
-    const userid = localStorage.getItem('userid');
-    console.log(userid);
-    const token = user?.token; // 确保你有 access 到 user
-    console.log('token', token);
-    console.log(loading);
     const fetchWrongAnswers = async () => {
       setLoading(true);
       if (!user || !user.token) {
@@ -21,7 +22,7 @@ export default function WrongAnswersPage() {
       try {
         const response = await fetch('/api/wrong-answers', {
           headers: {
-            Authorization: `Bearer ${user.token}`, // ✅ 使用 token
+            Authorization: `Bearer ${user.token}`,
           },
         });
 
@@ -30,16 +31,19 @@ export default function WrongAnswersPage() {
         }
 
         const data = await response.json();
-        // 用一个对象来去重
         const seen = new Set();
         const uniqueAnswers = data.filter((item) => {
-          if (seen.has(item.questionid)) {
-            return false;
-          }
+          if (seen.has(item.questionid)) return false;
           seen.add(item.questionid);
           return true;
         });
+
         setWrongAnswers(uniqueAnswers);
+
+        // 提取 topic 列表
+        const topicSet = new Set(uniqueAnswers.map((q) => q.topic));
+        setTopics(['all', ...Array.from(topicSet)]);
+        setFilteredAnswers(uniqueAnswers); // 初始显示全部
       } catch (error) {
         console.error('Error fetching wrong answers:', error);
       } finally {
@@ -49,39 +53,65 @@ export default function WrongAnswersPage() {
 
     fetchWrongAnswers();
   }, [user]);
-  const getAnswerText = (item, choice) => {
-    return item[choice]; // choice is 'a', 'b', or 'c'
-  };
+
+  useEffect(() => {
+    if (selectedTopic === 'all') {
+      setFilteredAnswers(wrongAnswers);
+    } else {
+      setFilteredAnswers(
+        wrongAnswers.filter((item) => item.topic === selectedTopic)
+      );
+    }
+  }, [selectedTopic, wrongAnswers]);
+
+  const getAnswerText = (item: any, choice: 'a' | 'b' | 'c') => item[choice];
 
   return (
-    <section class="goals-section">
-      <h1>My Wrong Answers</h1>
-      {wrongAnswers.length === 0 ? (
+    <section className="goals-section">
+      <h2>My Mistakes Journal</h2>
+
+      {/* 选择 Topic 的下拉框 */}
+      <div style={{ marginBottom: '1rem' }}>
+        <label htmlFor="topic-select">
+          <strong>Filter By Topic:</strong>{' '}
+        </label>
+        <select
+          id="topic-select"
+          value={selectedTopic}
+          onChange={(e) => setSelectedTopic(e.target.value)}>
+          {topics.map((topic) => (
+            <option key={topic} value={topic}>
+              {topic === 'all' ? 'All Topics' : topic}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : filteredAnswers.length === 0 ? (
         <p>No wrong answers found.</p>
       ) : (
         <ul>
-          {' '}
-          {wrongAnswers.map((item) => (
-            <div id="goals-container">
-              <li className="card" key={item.questionid}>
+          {filteredAnswers.map((item) => (
+            <div id="goals-container" key={item.questionid}>
+              <li className="card">
                 <strong>Topic:</strong> {item.topic} <br />
-                <strong>Learning outcomes statements (LOS):</strong> {item.los}{' '}
-                <br />
+                <strong>LOS:</strong> {item.los} <br />
                 <p>
                   <strong>Question:</strong> {item.question}
                 </p>
                 <strong>Correct Answer:</strong>{' '}
-                {getAnswerText(item, item.answer)}
-                <br />
+                {getAnswerText(item, item.answer)} <br />
                 <strong>Selected Option:</strong>{' '}
                 {getAnswerText(item, item.selectedAnswer)} <br />
                 <strong>Answered At:</strong>{' '}
                 {new Date(item.answeredAt).toLocaleString()} <br />
-              </li>{' '}
+              </li>
             </div>
-          ))}{' '}
+          ))}
         </ul>
-      )}{' '}
+      )}
     </section>
   );
 }
