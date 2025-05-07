@@ -23,7 +23,7 @@ export default function TopicButtons({ onTopicChange }: TopicButtonsProps) {
         <button
           key={topic}
           onClick={() => onTopicChange(topic)}
-          style={{ margin: '5px', padding: '8px 15px' }}>
+          style={{ margin: '5px', padding: '3px 15px' }}>
           {topic}
         </button>
       ))}

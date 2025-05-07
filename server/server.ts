@@ -5,6 +5,13 @@ import argon2 from 'argon2';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
+import bodyParser from 'body-parser';
+import Stripe from 'stripe';
+
+const stripePublishablekey =
+  'pk_live_51RK0muP7epSyF7rUwVgANJCSpPWVQjReaiziwRwuTvniQJ3zMp9ge0vCI1IX3zjLbqq1o2lcOLOcg07uqIVsRdEY00zDEAmnJj';
+const stripeSecretKey =
+  'pk_live_51RK0muP7epSyF7rUwVgANJCSpPWVQjReaiziwRwuTvniQJ3zMp9ge0vCI1IX3zjLbqq1o2lcOLOcg07uqIVsRdEY00zDEAmnJj';
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -28,6 +35,41 @@ app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
 // 。。。。。写在这 用这种形式
+app.use((req, res, next) => {
+  bodyParser.json()(req, res, next);
+});
+// crate a payment intent endpoint
+app.post('/api/create-payment-intent', async (req, res) => {
+  const { email, currency, amount } = req.body;
+  const stripe = new Stripe(stripeSecretKey, {
+    apiVersion: '2020-08-27',
+  });
+  const customer = await stripe.customers.create({ email });
+  console.log(req.body);
+  const params = {
+    amount: parseInt(amount),
+    currency,
+    customer: customer.id,
+    payment_method_options: {
+      card: {
+        request_three_d_secure: 'automatic',
+      },
+    },
+    payment_method_types: [],
+  };
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create(params);
+    return res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.send({
+      error: error.raw.message,
+    });
+  }
+});
 // app.get('/api/hello', (req, res) => {
 //   res.json({ message: 'Hello, World!' });
 // });
@@ -166,6 +208,12 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     const user = result.rows[0];
     res.status(201).json(user);
   } catch (err) {
+    console.log(err.code);
+    console.log(typeof err.code);
+    console.log(err);
+    if (err.code === '23505') {
+      return res.status(409).json({ error: 'Username already taken' });
+    }
     next(err);
   }
 });
@@ -254,27 +302,51 @@ app.post('/api/answers', authMiddleware, async (req, res, next) => {
     next(err);
   }
 });
-app.get('/api/wrong-answers', authMiddleware, async (req, res, next) => {
-  console.log('Received request for /api/wrong-answers');
-  console.log('Authorization header:', req.headers.authorization);
-  try {
-    const userid = req.user?.userid;
+app.post('/api/questions', authMiddleware, async (req, res, next) => {
+  const userid = req.user?.userid;
 
-    if (!userid) {
-      throw new ClientError(401, 'User not authenticated');
+  if (!userid) {
+    throw new ClientError(401, 'User not authenticated');
+  }
+
+  try {
+    const {
+      topic,
+      los,
+      question,
+      answer,
+      explanation,
+      a,
+      b,
+      c,
+      questionNumber,
+      // ❌ 不要再从 body 解构 userid
+    } = req.body;
+
+    if (!topic || !question || !answer) {
+      throw new ClientError(400, 'Required fields not completed');
     }
 
     const sql = `
-  SELECT *
-        FROM "userAnswers" ua
-        JOIN "questions" q ON ua."questionid" = q."questionid"
-       WHERE ua."userid" = $1
-         AND ua."isCorrect" = false
-      ORDER BY ua."answeredAt" DESC
+      INSERT INTO "questions" ("topic", "los", "question", "answer", "explanation", "a", "b", "c", "questionNumber", "userid")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING "questionid", "topic", "question", "answer", "explanation", "a", "b", "c", "questionNumber";
     `;
-
-    const result = await db.query(sql, [userid]);
-    res.json(result.rows);
+    const params = [
+      topic,
+      los,
+      question,
+      answer,
+      explanation,
+      a,
+      b,
+      c,
+      questionNumber,
+      userid,
+    ];
+    const result = await db.query(sql, params);
+    const newQuestion = result.rows[0];
+    res.status(201).json(newQuestion);
   } catch (err) {
     next(err);
   }

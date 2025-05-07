@@ -222,6 +222,26 @@ INSERT INTO questions (
   'same as the level of significance of the test.',
   2
 );
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  2020301,
+  'Economics',
+  'A market structure characterized by homogeneous/standardized product differentiation is best described as:',
+  'A market structure characterized by homogeneous/standardized product differentiation is best described as:',
+  'a',
+  'A is correct. Perfect competition and oligopoly are characterized by homogeneous/
+standardized product differentiation.
+Market Structure -- Degree of Product Differentiation
+Perfect competition  -- Homogeneous/standardized
+Monopolistic competition -- Differentiated
+Oligopoly -- Homogeneous/standardized
+Monopoly -- Unique product. B C is incorrect because monopolistic competition does not have a standardized product.',
+  'A perfect competition and oligopoly.',
+  'B monopolistic competition.',
+  'C monopoly.',
+  1
+);
 
 INSERT INTO questions (
   "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"

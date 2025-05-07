@@ -20,7 +20,7 @@ export default function SignInPage() {
       });
       if (!res.ok) {
         const { error } = await res.json();
-        setError(error || '登录失败');
+        setError(error || 'failed');
         return;
       }
 

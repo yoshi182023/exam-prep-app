@@ -27,6 +27,11 @@ export function RegistrationForm() {
       };
 
       const res = await fetch('/api/auth/sign-up', req);
+      //check if
+      if (res.status === 409) {
+        alert('User name already exists. Please change a username.');
+        return;
+      }
       if (!res.ok) {
         throw new Error(`fetch Error ${res.status}`);
       }
