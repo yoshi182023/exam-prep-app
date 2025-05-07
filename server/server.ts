@@ -8,11 +8,6 @@ import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
 import bodyParser from 'body-parser';
 import Stripe from 'stripe';
 
-const stripePublishablekey =
-  'pk_live_51RK0muP7epSyF7rUwVgANJCSpPWVQjReaiziwRwuTvniQJ3zMp9ge0vCI1IX3zjLbqq1o2lcOLOcg07uqIVsRdEY00zDEAmnJj';
-const stripeSecretKey =
-  'pk_live_51RK0muP7epSyF7rUwVgANJCSpPWVQjReaiziwRwuTvniQJ3zMp9ge0vCI1IX3zjLbqq1o2lcOLOcg07uqIVsRdEY00zDEAmnJj';
-
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -20,6 +15,9 @@ const db = new pg.Pool({
   },
 });
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2022-11-15',
+});
 const hashKey = process.env.TOKEN_SECRET;
 if (!hashKey) throw new Error('TOKEN_SECRET not found in .env');
 
@@ -39,37 +37,28 @@ app.use((req, res, next) => {
   bodyParser.json()(req, res, next);
 });
 // crate a payment intent endpoint
-app.post('/api/create-payment-intent', async (req, res) => {
-  const { email, currency, amount } = req.body;
-  const stripe = new Stripe(stripeSecretKey, {
-    apiVersion: '2020-08-27',
-  });
-  const customer = await stripe.customers.create({ email });
-  console.log(req.body);
-  const params = {
-    amount: parseInt(amount),
-    currency,
-    customer: customer.id,
-    payment_method_options: {
-      card: {
-        request_three_d_secure: 'automatic',
-      },
-    },
-    payment_method_types: [],
-  };
+// /api/payment/create-intent
+// const stripeService = require('./stripeService');
 
+app.post('/api/create-payment-intent', async (req, res, next) => {
   try {
-    const paymentIntent = await stripe.paymentIntents.create(params);
-    return res.send({
-      clientSecret: paymentIntent.client_secret,
+    const { amount } = req.body;
+    const customer = await stripe.customers.create();
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 990,
+      currency: 'usd',
+      description: 'User registration fee',
+      customer: customer.id,
     });
-  } catch (error) {
-    console.log(error);
-    return res.send({
-      error: error.raw.message,
-    });
+    res.send({ clientSecret: paymentIntent.client_secret });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
   }
 });
+
 // app.get('/api/hello', (req, res) => {
 //   res.json({ message: 'Hello, World!' });
 // });
@@ -150,7 +139,7 @@ app.get(
       const sql = `
       SELECT *
       FROM questions
-      WHERE "topic" = $1 AND "questionNumber" = $2
+      WHERE "topic" = $1 AND "questionNumber" = $2 AND "userid" IS NULL
     `;
       const params = [topicName, questionNumber];
       const result = await db.query(sql, params);
@@ -193,9 +182,17 @@ app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    // const { username, email, password } = req.body;
+    const { username, email, password, paymentIntentId } = req.body;
+
     if (!username || !email || !password) {
       throw new ClientError(400, 'required fields not completed');
+    }
+    // Verify payment was successful
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+    if (paymentIntent.status !== 'succeeded') {
+      return res.status(402).json({ error: 'Payment required' });
     }
     const hashedPassword = await argon2.hash(password);
     const sql = `
@@ -274,6 +271,39 @@ app.post('/api/review', authMiddleware, async (req, res, next) => {
     next(err);
   }
 });
+app.get(
+  '/api/custom-questions/:topic',
+  authMiddleware,
+  async (req, res, next) => {
+    try {
+      const topic = req.params.topic;
+
+      const { userid } = req.user;
+      const result = await db.query(
+        `
+      SELECT
+        questionid,
+        topic,
+        los,
+        question,
+        answer,
+        explanation,
+        a,
+        b,
+        c,
+       NOW() AS "created_at"
+      FROM questions
+      WHERE topic = $1 AND userid = $2
+      `,
+        [topic, userid]
+      );
+      res.json(result.rows);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 app.post('/api/answers', authMiddleware, async (req, res, next) => {
   try {
     const userid = req.user?.userid;
@@ -320,10 +350,9 @@ app.post('/api/questions', authMiddleware, async (req, res, next) => {
       b,
       c,
       questionNumber,
-      // ❌ 不要再从 body 解构 userid
     } = req.body;
 
-    if (!topic || !question || !answer) {
+    if (!topic) {
       throw new ClientError(400, 'Required fields not completed');
     }
 
@@ -341,7 +370,7 @@ app.post('/api/questions', authMiddleware, async (req, res, next) => {
       a,
       b,
       c,
-      questionNumber,
+      questionNumber || undefined,
       userid,
     ];
     const result = await db.query(sql, params);
@@ -351,7 +380,31 @@ app.post('/api/questions', authMiddleware, async (req, res, next) => {
     next(err);
   }
 });
+app.get('/api/wrong-answers', authMiddleware, async (req, res, next) => {
+  console.log('Received request for /api/wrong-answers');
+  console.log('Authorization header:', req.headers.authorization);
+  try {
+    const userid = req.user?.userid;
 
+    if (!userid) {
+      throw new ClientError(401, 'User not authenticated');
+    }
+
+    const sql = `
+  SELECT *
+        FROM "userAnswers" ua
+        JOIN "questions" q ON ua."questionid" = q."questionid"
+       WHERE ua."userid" = $1
+         AND ua."isCorrect" = false
+      ORDER BY ua."answeredAt" DESC
+    `;
+
+    const result = await db.query(sql, [userid]);
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+});
 /** ---------------------- 原有的 questions 接口保留不动 ---------------------- **/
 /*
  * Handles paths that aren't handled by any other route handler.

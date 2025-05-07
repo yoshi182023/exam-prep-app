@@ -56,6 +56,8 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.3.0",
     "argon2": "^0.43.0",
     "body-parser": "^2.2.0",
     "jsonwebtoken": "^9.0.2",

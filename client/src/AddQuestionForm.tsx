@@ -3,9 +3,10 @@ import { useUser } from './UserContext';
 
 type Props = {
   topic: string;
+  onAddSuccess?: () => void; // 新增这个 prop
 };
 
-const AddQuestionForm: React.FC<Props> = ({ topic }) => {
+const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
   const { user } = useUser();
   const [formData, setFormData] = useState({
     los: '',
@@ -44,6 +45,19 @@ const AddQuestionForm: React.FC<Props> = ({ topic }) => {
     const data = await res.json();
     console.log('Added question:', data);
     // 可选：重置表单或通知 ReviewList 刷新
+    if (res.ok) {
+      setFormData({
+        los: '',
+        question: '',
+        answer: '',
+        explanation: '',
+        a: '',
+        b: '',
+        c: '',
+        questionNumber: '',
+      });
+      onAddSuccess?.(); // 触发刷新
+    }
   };
 
   return (

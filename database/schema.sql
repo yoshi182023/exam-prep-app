@@ -23,8 +23,7 @@ CREATE TABLE "questions" (
   "b" text,
   "c" text,
   "questionNumber" int,
-   "userid" INT NOT NULL,
-  FOREIGN KEY ("userid") REFERENCES "users"("userid")
+   "userid" INT
 );
 
 

@@ -11,34 +11,59 @@ type ReviewItem = {
 
 type Props = {
   topic: string;
+  refreshKey: number; // ✅ 添加这个
 };
 
-const ReviewList: React.FC<Props> = ({ topic }) => {
+const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
   const { user } = useUser();
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null); // null = list view
 
+  // useEffect(() => {
+  //   const fetchReviews = async () => {
+  //     setLoading(true);
+  //     // const token = localStorage.getItem('token');
+  //     const token = user?.token;
+  //     const res = await fetch(`/api/reviews/${topic}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     const data = await res.json();
+  //     console.log('Fetched data:', data);
+
+  //     setReviews(data);
+  //     setLoading(false);
+  //   };
+
+  //   fetchReviews();
+  // }, [topic, refreshKey]); // <-- 每次 refreshTrigger 变化就会刷新
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchAllQuestions = async () => {
       setLoading(true);
       // const token = localStorage.getItem('token');
       const token = user?.token;
-      const res = await fetch(`/api/reviews/${topic}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
 
-      const data = await res.json();
-      console.log('Fetched data:', data);
+      const [res1, res2] = await Promise.all([
+        fetch(`/api/reviews/${topic}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch(`/api/custom-questions/${topic}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
 
-      setReviews(data);
+      const [official, custom] = await Promise.all([res1.json(), res2.json()]);
+
+      const all = [...official, ...custom];
+      setReviews(all);
       setLoading(false);
     };
 
-    fetchReviews();
-  }, [topic]);
+    fetchAllQuestions();
+  }, [topic, refreshKey]);
 
   if (loading) return <div>Loading reviews...</div>;
   if (reviews.length === 0)
