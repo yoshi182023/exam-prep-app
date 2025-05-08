@@ -27,14 +27,12 @@
   text-align: center;
 }
 
-/* 表单样式 */
 .registration-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* 表单字段组 */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -68,7 +66,7 @@
   padding: 2vh;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  background-color: #f8fafc;
+  background-color: #c7def540;
   margin-top: 2%;
 }
 
@@ -125,7 +123,8 @@
 }
 
 /* 响应式调整 */
-@media (width <= 640px) {
+
+/* @media (width <= 640px) {
   .registration-container {
     margin: 1rem;
     padding: 1.5rem;
@@ -134,4 +133,4 @@
   .registration-title {
     font-size: 1.5rem;
   }
-}
+} */
