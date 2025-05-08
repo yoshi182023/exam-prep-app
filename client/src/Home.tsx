@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 export default function Home() {
   return (
@@ -14,6 +15,9 @@ export default function Home() {
         <Link to="/question/Economics/1" className="big-button right-button">
           <h2 className="right"> Practice by Subjects</h2>
         </Link>
+      </div>
+      <div className="navbar-container">
+        <Navbar />{' '}
       </div>
     </>
   );
