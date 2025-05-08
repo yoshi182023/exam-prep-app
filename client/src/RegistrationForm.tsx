@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from './UserContext';
+import './RegistrationForm.css';
 
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { StripeCardElement } from '@stripe/stripe-js';
@@ -83,35 +84,31 @@ export function RegistrationForm() {
   }
 
   return (
-    <div className="container">
-      <h2 className="text-xl font-bold">Register</h2>
+    <div className="registration-container">
+      {' '}
+      <div className="slogan">
+        <h3 className="slogan1">Create Your Account</h3>
+        <h3 className="slogan2">
+          Gain unlimited lifetime access to personalize your exam experience
+        </h3>
+      </div>
+      <h2 className="registration-title">Register</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input name="username" required className="block border" />
-        </label>
-        <label>
-          Email
-          <input name="email" type="email" required className="block border" />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            required
-            className="block border"
-          />
-        </label>
-        <label className="block mt-4">
-          Card Info
-          <div className="border p-2 rounded">
-            <CardElement />
-          </div>
-        </label>
-        <button
-          disabled={isLoading}
-          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input name="username" required />
+          <label htmlFor="email">Email</label>
+          <input name="email" type="email" required />
+          <label>Password </label>{' '}
+          <input name="password" type="password" required />
+          <label className="form-label">
+            Payment Information
+            <div className="card-element-container">
+              <CardElement />
+            </div>
+          </label>{' '}
+        </div>
+        <button className="pay-button" disabled={isLoading}>
           {isLoading ? 'Processing...' : 'Pay & Register'}
         </button>
       </form>

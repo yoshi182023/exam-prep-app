@@ -1,0 +1,137 @@
+/* RegistrationForm.css */
+
+/* 表单容器 */
+.registration-container {
+  max-width: 70%;
+  margin: 2% auto;
+  padding: 2%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.slogan {
+  margin-bottom: 5%;
+  color: #2821fbd6;
+  background: linear-gradient(135deg, #b689e33e 0%, #de63711b 100%);
+  border-radius: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.registration-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* 表单样式 */
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 表单字段组 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5%;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  background-color: #84c943b2;
+}
+
+/* Stripe 信用卡输入区域 */
+.card-element-container {
+  padding: 2vh;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  margin-top: 2%;
+}
+
+/* 支付按钮 */
+.pay-button {
+  padding: 1rem;
+  background: linear-gradient(135deg, #12e0579b 0%, #7d30cae4 100%);
+  color: white;
+  border: none;
+  border-radius: 11px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+}
+
+.pay-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.pay-button:disabled {
+  background: #cbd5e0;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* 错误状态 */
+.form-error {
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* 加载指示器 */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 响应式调整 */
+@media (width <= 640px) {
+  .registration-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .registration-title {
+    font-size: 1.5rem;
+  }
+}
