@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';
 import { Link } from 'react-router-dom';
 
+import './SignIn.css';
+
 export default function SignInPage() {
   const { setUser } = useUser();
   const navigate = useNavigate();
@@ -33,30 +35,29 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="container">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-sm w-full">
-        <h2 className="text-xl font-bold mb-4 text-center">Log in</h2>
+        <h2 className="form-header">Log in</h2>
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {error && <p className="error-message">{error}</p>}
 
-        <div className="mb-4">
-          <label className="block mb-1">
-            Username
-            <input
-              required
-              name="username"
-              type="text"
-              className="block border border-gray-600 rounded p-2 h-8 w-full"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
+        <div className="form-group">
+          <label className="form-label">Username</label>
+
+          <input
+            required
+            name="username"
+            type="text"
+            className="block border border-gray-600 rounded p-2 h-8 w-full"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
 
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm mb-2">Password</label>
+        <div className="form-group">
+          <label className="form-label">Password</label>
           <input
             type="password"
             required
@@ -66,15 +67,13 @@ export default function SignInPage() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
+        <button type="submit" className="submit-btn">
           Sign in
         </button>
       </form>
-      <p className="mt-4 text-center">
+      <p className="form-footer">
         Don&apos;t have an account?{' '}
-        <Link to="/register" className="text-blue-600 hover:underline">
+        <Link to="/register" className="register-link">
           Register here
         </Link>
       </p>
