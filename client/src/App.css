@@ -13,13 +13,13 @@ navbar-container {
 }
 
 /* 导航栏按钮样式 */
-.navbar {
+.navbar.top {
   background: linear-gradient(to right, #6c1cbd17, #2ab24c);
   color: white;
   border: linen;
   background-color: rgba(177, 130, 225, 0.409);
   display: flex;
-  font-size: 2vw;
+  font-size: 3vw;
   font-weight: bold;
   border-radius: 19px;
   box-shadow: 0 4px 10px rgba(225, 236, 226, 0.769);
@@ -27,6 +27,19 @@ navbar-container {
   text-align: center;
   align-items: center; /* 垂直居中 */
   justify-content: center; /* 水平居中 */
+  height: 5vh;
+  margin-top: 10%;
+}
+
+.navbar.bottom {
+  border-radius: 19px;
+  height: 5vh;
+  background: linear-gradient(to right, #e5f040c9, #1f2937);
+  margin-top: 10%;
+  font-size: 3vw;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20%;
 }
 
 .navbar:hover {
@@ -34,23 +47,33 @@ navbar-container {
   transform: translateY(-5px);
 }
 
+/* 确保 NavLink 文字样式 */
+.navbar a {
+  color: white !important;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: bold;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 3vw; /* 用视窗宽度单位设置间距 */
-  margin-top: 5vh; /* 用视窗高度单位设置上边距 */
+  margin-top: 10%; /* 用视窗高度单位设置上边距 */
 }
 
 /* 左边按钮紫色 */
 .big-button {
   background-color: rgba(177, 130, 225, 0.409);
   display: flex;
-  font-size: 2vw;
+  font-size: 3vw;
   font-weight: bold;
   border-radius: 19px;
   box-shadow: 0 4px 10px rgba(37, 223, 68, 0.625);
   transition: transform 0.2s, background-color 0.2s;
-  width: 20vw; /* 或使用百分比 */
+  width: 20%; /* 或使用百分比 */
   text-align: center;
   padding-top: 6%;
   padding-bottom: 6%;
@@ -60,7 +83,7 @@ navbar-container {
   justify-content: center; /* 水平居中 */
   margin-right: 6%;
   margin-left: 6%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 /* 紫色按钮 */
@@ -102,7 +125,10 @@ navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20%;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  margin-bottom: 3%;
 }
 
 .left-link {
@@ -159,12 +185,12 @@ navbar-container {
 .link-button {
   display: inline-block;
   padding: 10px 20px;
-  margin: 0 10px;
   background-color: #646cffaa;
   color: white;
   border-radius: 5px;
   font-weight: bold;
   transition: all 0.3s;
+  top: 0;
 }
 
 .link-button:hover {
@@ -420,10 +446,6 @@ select:focus {
 
 .filter-controls select {
   width: auto;
-}
-
-.goals-section {
-  padding-top: var(--space-md);
 }
 
 .goal-card.achieved {
