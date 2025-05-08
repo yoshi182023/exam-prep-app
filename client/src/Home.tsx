@@ -4,9 +4,9 @@ import Navbar from './Navbar';
 export default function Home() {
   return (
     <>
-      <div>
+      <div className="homepage">
         <h1>Chartered Financial Analyst Exam Prep</h1>
-        <h2>CFA Level 1</h2>
+        <h2>CFA® Level 1</h2>
       </div>
       <div className="button-container">
         <Link to="/reviews" className="big-button left-button">
