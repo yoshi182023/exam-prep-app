@@ -8,6 +8,7 @@ type ReviewItem = {
   explanation: string;
   created_at: string;
   source: 'review' | 'custom';
+  reviewId: number;
 };
 
 type Props = {
@@ -54,14 +55,14 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
       const [official, custom] = await Promise.all([res1.json(), res2.json()]);
 
       const all = [
-        ...official.map((item) => ({ ...item, source: 'review' })),
-        ...custom.map((item) => ({ ...item, source: 'custom' })),
+        ...official.map((item: ReviewItem) => ({ ...item, source: 'review' })),
+        ...custom.map((item: ReviewItem) => ({ ...item, source: 'custom' })),
       ];
       setReviews(all);
       setLoading(false);
     };
     fetchAllQuestions();
-  }, [topic, refreshKey]);
+  }, [topic, refreshKey, user?.token]);
 
   const handleDelete = async (item: ReviewItem) => {
     if (!confirm('Are you sure you want to delete this question?')) return;

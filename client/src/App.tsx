@@ -14,19 +14,18 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="nav-container">
-        <div className="left-link">
-          <Link className="link-button" to="/">
-            Home
+        {/* Home 按钮 - 绝对最左边 */}
+        <Link className="link-button home-button" to="/">
+          Home
+        </Link>
+
+        {/* 右侧按钮组 */}
+        <div className="right-links">
+          <Link className="link-button" to="/sign-in">
+            Sign In
           </Link>
-          <Link to="/sign-in">Sign In</Link>
-          <Link to="/question/Economics/1"> QuestionComponent</Link>
-          <div className="right-links">
-            <Link to="/reviews">Review My Flashcards</Link>
-            <Link to="/wrong-answers">Mistakes</Link>{' '}
-          </div>
         </div>
       </div>
-
       <Routes>
         {/* 根路由 */}
         <Route path="/" element={<Home />} />
@@ -39,6 +38,9 @@ export default function App() {
         <Route path="/reviews" element={<ReviewPage />} />
         <Route path="/wrong-answers" element={<WrongAnswersPage />} />{' '}
         <Route path="/search" element={<SearchQuestions />} />
+        {/* <Link className="link" to="/wrong-answers">
+          Mistakes
+        </Link> */}
       </Routes>
       <Navbar />
     </BrowserRouter>

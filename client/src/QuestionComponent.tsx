@@ -15,6 +15,7 @@ export type Question = {
   explanation: string;
   topic: string; // 添加这个字段以匹配后端
   questionid: number;
+  los: string;
 };
 
 export default function QuestionComponent() {

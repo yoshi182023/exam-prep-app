@@ -30,7 +30,7 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
     const payload = {
       ...formData,
       topic,
-      userid: user?.userid,
+      userid: user?.user.userid,
     };
 
     const res = await fetch('/api/questions', {

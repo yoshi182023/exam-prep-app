@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import _ from 'lodash';
-import type { Question } from './types';
+import type { Question } from './QuestionComponent';
 
 // 前端 search API：调用你自己的后端
 const searchAPI = async (keyword: string, limit = 100) => {

@@ -4,7 +4,8 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1>Chartered Financial Analyst Exam Prep.</h1>
+        <h1>Chartered Financial Analyst Exam Prep</h1>
+        <h2>CFA Level 1</h2>
       </div>
       <div className="button-container">
         <Link to="/reviews" className="big-button left-button">

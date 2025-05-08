@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { User } from './UserContext';
 
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import { StripeCardElement } from '@stripe/stripe-js';
 
 export function RegistrationForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,9 @@ export function RegistrationForm() {
       // Step 2: Confirm payment
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: elements.getElement(CardElement)!,
+          card: elements.getElement(
+            CardElement
+          )! as unknown as StripeCardElement,
         },
       });
 
