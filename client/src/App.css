@@ -5,16 +5,16 @@
   text-align: center;
 }
 
-.home-container {
+/* .home-container {
   text-align: center;
   padding: 50px;
-}
+} */
 
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
+  gap: 3vw; /* 用视窗宽度单位设置间距 */
+  margin-top: 5vh; /* 用视窗高度单位设置上边距 */
 }
 
 /* 左边按钮紫色 */
