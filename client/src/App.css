@@ -1,14 +1,10 @@
 #root {
-  max-width: 1280px;
+  width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
-
-/* .home-container {
-  text-align: center;
-  padding: 50px;
-} */
 
 .button-container {
   display: flex;
@@ -21,13 +17,13 @@
 .big-button {
   background-color: rgba(177, 130, 225, 0.409);
   display: inline-block;
-  padding: 30px 40px; /* 减小高度 */
-  font-size: 25px;
+  padding: 3vh 4vw;
+  font-size: 2vw;
   font-weight: bold;
   border-radius: 19px;
   box-shadow: 0 4px 10px rgba(37, 223, 68, 0.625);
   transition: transform 0.2s, background-color 0.2s;
-  width: 280px;
+  width: 20vw; /* 或使用百分比 */
   text-align: center;
 }
 
