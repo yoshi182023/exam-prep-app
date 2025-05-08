@@ -7,11 +7,12 @@ type ReviewItem = {
   los: string;
   explanation: string;
   created_at: string;
+  source: 'review' | 'custom';
 };
 
 type Props = {
   topic: string;
-  refreshKey: number; // ✅ 添加这个
+  refreshKey: number; // ✅
 };
 
 const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
@@ -30,22 +31,17 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
   //         Authorization: `Bearer ${token}`,
   //       },
   //     });
-
   //     const data = await res.json();
   //     console.log('Fetched data:', data);
-
   //     setReviews(data);
   //     setLoading(false);
   //   };
-
   //   fetchReviews();
   // }, [topic, refreshKey]); // <-- 每次 refreshTrigger 变化就会刷新
   useEffect(() => {
     const fetchAllQuestions = async () => {
       setLoading(true);
-      // const token = localStorage.getItem('token');
       const token = user?.token;
-
       const [res1, res2] = await Promise.all([
         fetch(`/api/reviews/${topic}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -57,17 +53,43 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
 
       const [official, custom] = await Promise.all([res1.json(), res2.json()]);
 
-      const all = [...official, ...custom];
+      const all = [
+        ...official.map((item) => ({ ...item, source: 'review' })),
+        ...custom.map((item) => ({ ...item, source: 'custom' })),
+      ];
       setReviews(all);
       setLoading(false);
     };
-
     fetchAllQuestions();
   }, [topic, refreshKey]);
+
+  const handleDelete = async (item: ReviewItem) => {
+    if (!confirm('Are you sure you want to delete this question?')) return;
+    const token = user?.token;
+    const endpoint =
+      item.source === 'review'
+        ? `/api/reviews/${item.reviewId}` // 👈 用 reviewId 来删
+        : `/api/questions/${item.questionid}`;
+
+    const res = await fetch(endpoint, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      setReviews(reviews.filter((r) => r.questionid !== item.questionid));
+    } else {
+      alert('Failed to delete question.');
+    }
+  };
 
   if (loading) return <div>Loading reviews...</div>;
   if (reviews.length === 0)
     return <div>No reviews found for topic: {topic}</div>;
+
+  console.log('review items:', reviews);
 
   // === Card View ===
   if (currentIndex !== null) {
@@ -123,7 +145,14 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
               <div className="text-sm text-gray-500">
                 Saved on: {new Date(item.created_at).toLocaleDateString()}
               </div>
-              <button> Delete </button>{' '}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // 👈 避免触发外层 onClick（进入卡片视图）
+                  handleDelete(item);
+                }}
+                className="text-red-600 hover:text-red-800">
+                Delete
+              </button>
             </div>
           </li>
         ))}

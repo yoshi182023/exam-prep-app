@@ -62,31 +62,6 @@ export default function QuestionComponent() {
     }
   }, [questionNumber]);
 
-  // async function sendAnswerToServer() {
-  //   if (!user?.userid || !currentQuestion || !selectedAnswer) return;
-  //   try {
-  //     const res = await fetch('/api/answer', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-
-  //       body: JSON.stringify({
-  //         questionid: currentQuestion.questionid,
-  //         selectedAnswer,
-  //         isCorrect,
-  //       }),
-  //     });
-  //     if (!res.ok) {
-  //       throw new Error('Failed to save answer.');
-  //     }
-  //     const data = await res.json();
-  //     console.log('Answer saved:', data);
-  //   } catch (error) {
-  //     console.error('Error saving answer:', error);
-  //   }
-  // }
-
   function handleAnswerClick(choice: string) {
     if (showExplanation || !currentQuestion) return;
     const isCorrect = choice === currentQuestion?.answer;
@@ -150,11 +125,12 @@ export default function QuestionComponent() {
   const isCorrect = selectedAnswer === currentQuestion.answer;
 
   return (
-    <div>
+    <div className="question-container">
       <TopicButtons onTopicChange={handleTopicChange} />
+      <div className="question">Topic: {currentQuestion.topic}</div>
       <h3>{currentQuestion.question}</h3>
 
-      <div>
+      <div className="option">
         {['a', 'b', 'c'].map((key) => (
           <button
             key={key}
@@ -168,7 +144,7 @@ export default function QuestionComponent() {
                   ? 'lightcoral'
                   : 'white',
               margin: '5px',
-              opacity: showExplanation ? 0.6 : 1, // 透明度
+              opacity: showExplanation ? 0.6 : 1,
               color: showExplanation ? 'purple' : 'black',
 
               padding: '10px 20px',
@@ -177,21 +153,21 @@ export default function QuestionComponent() {
           </button>
         ))}
       </div>
-
-      <div className="actions" style={{ marginTop: '20px' }}>
+      <div className="action-buttons" style={{ marginTop: '10px' }}>
         <div className="actions" style={{ marginTop: '20px' }}>
           <AddToReviewButton
             questionid={currentQuestion.questionid}
             topic={currentQuestion.topic ?? ''}
           />
-
-          <button onClick={handleSkip}>Skip</button>
+          <button className="skip-button" onClick={handleSkip}>
+            Skip
+          </button>
         </div>
       </div>
 
       {showExplanation && (
         <div style={{ marginTop: '20px' }}>
-          <h3>{isCorrect ? 'Correct!' : 'Incorrect!'}</h3>
+          <h3>{isCorrect ? 'Correct ✅' : '❌ Incorrect '}</h3>
           <p>{currentQuestion.explanation}</p>
         </div>
       )}

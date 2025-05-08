@@ -13,13 +13,19 @@ import SearchQuestions from './SearchQuestions';
 export default function App() {
   return (
     <BrowserRouter>
-      <Link className="link-button" to="/">
-        Home
-      </Link>
-      <Link to="/sign-in">Sign In</Link>
-      <Link to="/question/Economics/1"> QuestionComponent</Link>
-      <Link to="/reviews">Review My Flashcards</Link>
-      <Link to="/wrong-answers">Mistakes</Link>
+      <div className="nav-container">
+        <div className="left-link">
+          <Link className="link-button" to="/">
+            Home
+          </Link>
+          <Link to="/sign-in">Sign In</Link>
+          <Link to="/question/Economics/1"> QuestionComponent</Link>
+          <div className="right-links">
+            <Link to="/reviews">Review My Flashcards</Link>
+            <Link to="/wrong-answers">Mistakes</Link>{' '}
+          </div>
+        </div>
+      </div>
 
       <Routes>
         {/* 根路由 */}

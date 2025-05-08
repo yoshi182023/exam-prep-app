@@ -5,6 +5,125 @@
   text-align: center;
 }
 
+.home-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* 左边按钮紫色 */
+.big-button {
+  background-color: rgba(177, 130, 225, 0.409);
+  display: inline-block;
+  padding: 30px 40px; /* 减小高度 */
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 19px;
+  box-shadow: 0 4px 10px rgba(37, 223, 68, 0.625);
+  transition: transform 0.2s, background-color 0.2s;
+  width: 280px;
+  text-align: center;
+}
+
+/* 紫色按钮 */
+.left-button {
+  background: linear-gradient(
+    to right,
+    rgba(109, 28, 189, 0.768),
+    rgba(130, 98, 163, 0.768)
+  );
+}
+
+.left-button h2 {
+  color: rgba(236, 237, 217, 0.898);
+  text-shadow: 0 0 1px #fff, 0 0 1px rgba(0, 255, 255, 0.073),
+    0 0 15px rgba(150, 28, 169, 0.656);
+}
+
+/* 黄色按钮 */
+.right-button {
+  background: linear-gradient(
+    to right,
+    rgba(243, 243, 7, 0.344),
+    rgba(255, 217, 0, 0.482)
+  );
+}
+
+.right-button h2 {
+  color: rgba(174, 51, 196, 0.816);
+  text-shadow: 0 0 1px #fff, 0 0 1px rgba(0, 255, 255, 0.073),
+    0 0 15px rgba(201, 206, 46, 0.652);
+}
+
+.big-button:hover {
+  background-color: #55de7775;
+  transform: translateY(-5px);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.left-link {
+  flex: 1;
+}
+
+/* 全局放大字体 */
+.question-container {
+  font-size: 1.5rem;
+}
+
+.question {
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #6d1cbd;
+}
+
+/* 操作按钮容器 - 改为纵向布局 */
+.action-buttons {
+  display: flex;
+  flex-direction: column; /* 改为纵向排列 */
+  gap: 10px; /* 按钮间距 */
+  width: 100%;
+  max-width: 300px; /* 限制最大宽度（可选） */
+  margin: 20px auto; /* 居中 */
+}
+
+/* 统一按钮宽度 */
+.action-buttons button {
+  width: 100%; /* 充满父容器 */
+  font-size: 1.2rem;
+  padding: 12px 0;
+  margin-bottom: 25px;
+  border-radius: 45px;
+  margin-top: 25px;
+}
+
+.add {
+  background-color: rgba(235, 13, 13, 0.709);
+  color: white;
+}
+
+.skip-button {
+  background-color: #4b5563c4;
+  color: white;
+}
+
+.option {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 .card {
   border-bottom: 2px dashed #bb3c3c;
   margin-bottom: 20px;
@@ -173,7 +292,7 @@ section {
   box-shadow: gainsboro;
 }
 
-h2 {
+.h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: var(--space-md);

@@ -59,9 +59,6 @@ app.post('/api/create-payment-intent', async (req, res, next) => {
   }
 });
 
-// app.get('/api/hello', (req, res) => {
-//   res.json({ message: 'Hello, World!' });
-// });
 // GET /api/questions
 app.get('/api/questions/search', async (req, res, next) => {
   try {
@@ -89,7 +86,6 @@ app.get('/api/questions/search', async (req, res, next) => {
     res.json(result.rows);
   } catch (err) {
     console.error(err); // 👈 看这里打印了什么
-
     next(err);
   }
 });
@@ -107,7 +103,6 @@ app.get('/api/questions', async (req, res, next) => {
     next(err);
   }
 });
-
 app.get('/api/questions/:questionNumber', async (req, res, next) => {
   try {
     const { questionNumber } = req.params;
@@ -130,7 +125,6 @@ app.get('/api/questions/:questionNumber', async (req, res, next) => {
     next(err);
   }
 });
-
 app.get(
   '/api/questions/topic/:topicName/:questionNumber',
   async (req, res, next) => {
@@ -160,10 +154,9 @@ app.get(
 app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
   try {
     const topic = req.params.topic;
-
     const result = await db.query(
       `
-       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt" AS "created_at"
+       SELECT q."questionid", q."los", q."explanation", q."topic", ur."addedAt" AS "created_at", ur."reviewId"
   FROM "userReviews" ur
   JOIN "questions" q ON ur."questionid" = q."questionid"
   WHERE ur."userid" = $1 AND q."topic" = $2
@@ -171,12 +164,59 @@ app.get('/api/reviews/:topic', authMiddleware, async (req, res, next) => {
       `,
       [req.user?.userid, topic]
     );
-
     res.json(result.rows);
   } catch (err) {
     next(err);
   }
 });
+/** ---------------------- delete ---------------------- **/
+// req.params
+// app.delete('/api/reviews/:   questionid)
+
+app.delete('/api/reviews/:reviewId', authMiddleware, async (req, res, next) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const userid = req.user?.userid;
+    // 确保用户只能删自己的 review
+    await db.query(
+      `DELETE FROM "userReviews" WHERE "reviewId" = $1 AND "userid" = $2`,
+      [reviewId, req.user?.userid]
+    );
+    // if (result.rowCount === 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: 'Review not found or unauthorized' });
+    // }
+    res.status(200).json({ message: 'Deleted from userReviews' });
+  } catch (err) {
+    next(err);
+  }
+});
+app.delete(
+  '/api/questions/:questionid',
+  authMiddleware,
+  async (req, res, next) => {
+    try {
+      const questionid = req.params.questionid;
+      const userid = req.user?.userid;
+
+      const result = await db.query(
+        `DELETE FROM "questions" WHERE "questionid" = $1 AND "userid" = $2 RETURNING *`,
+        [questionid, userid]
+      );
+
+      if (result.rowCount === 0) {
+        return res
+          .status(404)
+          .json({ error: 'Question not found or not owned by user' });
+      }
+
+      res.json({ message: 'Question deleted' });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 /** ---------------------- 注册和登录 ---------------------- **/
 
@@ -371,7 +411,7 @@ app.post('/api/questions', authMiddleware, async (req, res, next) => {
       b,
       c,
       questionNumber || undefined,
-      userid,
+      userid, // userid===1? undefined : userid
     ];
     const result = await db.query(sql, params);
     const newQuestion = result.rows[0];
