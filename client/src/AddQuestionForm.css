@@ -1,0 +1,89 @@
+/* Form Container */
+.question-form {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Form Header */
+.form-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2821fbd6;
+  margin-bottom: 0.5rem;
+}
+
+.form-topic {
+  font-style: italic;
+  color: #6d1cbd;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+/* Input Fields - General */
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+/* Special Fields - Larger Text Areas */
+.form-input-large {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-input-regular {
+  max-width: 88%;
+}
+
+/* Options Row */
+.options-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: linear-gradient(to right, #4299e1, #3182ce);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (width <= 768px) {
+  .options-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .form-input-regular {
+    max-width: 100%;
+  }
+}

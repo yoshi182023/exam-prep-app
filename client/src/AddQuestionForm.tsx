@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from './UserContext';
-
+import './AddQuestionForm.css';
 type Props = {
   topic: string;
   onAddSuccess?: () => void; // 新增这个 prop
@@ -61,24 +61,22 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-4 bg-white shadow-md rounded mb-4">
-      <h2 className="text-lg font-bold mb-2">Set your own new question for</h2>
-      <p>"{topic}"</p>
+    <form onSubmit={handleSubmit} className="question-form">
+      <h2 className="form-header">Set your own new question for</h2>
+      <span className="form-topic">"{topic}"</span>
       <input
         name="los"
         placeholder="LOS"
         onChange={handleChange}
         value={formData.los}
-        className="input"
+        className="form-input form-input-regular"
       />
       <textarea
         name="question"
         placeholder="Question"
         onChange={handleChange}
         value={formData.question}
-        className="input"
+        className="form-input form-input-large"
       />
       <input
         name="answer"
