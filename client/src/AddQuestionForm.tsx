@@ -118,7 +118,7 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
         placeholder="Question Number"
         onChange={handleChange}
         value={formData.questionNumber}
-        className="input"
+        className="form-input form-input-large"
       />
       <button type="submit" className="submit-btn">
         Submit

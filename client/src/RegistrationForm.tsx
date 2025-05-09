@@ -89,17 +89,26 @@ export function RegistrationForm() {
       <div className="slogan">
         <h3 className="slogan1">Create Your Account</h3>
         <h3 className="slogan2">
-          Gain unlimited lifetime access to personalize your exam experience
+          Gain unlimited lifetime access to personalize your exam experience!
         </h3>
       </div>
+      <span className="grey">
+        Study with high quality learning tools that help you learn faster,
+        retain longer, and score higher. You will become a confident candidate,
+        subscribe and start today!
+      </span>
       <h2 className="registration-title">Register</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label className="form-label" htmlFor="username">
+            Username
+          </label>
           <input name="username" required />
-          <label htmlFor="email">Email</label>
+          <label className="form-label" htmlFor="email">
+            Email
+          </label>
           <input name="email" type="email" required />
-          <label>Password </label>{' '}
+          <label className="form-label">Password </label>{' '}
           <input name="password" type="password" required />
           <label className="form-label">
             Payment Information

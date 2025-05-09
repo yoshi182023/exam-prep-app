@@ -4,7 +4,7 @@
 .registration-container {
   max-width: 85%;
   margin: 2% auto;
-  padding: 2%;
+  padding: 5%;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -12,7 +12,7 @@
 }
 
 .slogan {
-  margin-bottom: 5%;
+  margin-bottom: 6%;
   color: #2821fbd6;
   background: linear-gradient(135deg, #b689e33e 0%, #de63711b 100%);
   border-radius: 5%;
@@ -24,6 +24,7 @@
   font-weight: 700;
   color: #2d3748;
   margin-bottom: 1.5rem;
+  margin-top: 5%;
   text-align: center;
 }
 
@@ -36,22 +37,13 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5%;
+  gap: 0.5rem;
 }
 
 .form-label {
   font-size: 0.95rem;
   font-weight: 600;
   color: #4a5568;
-}
-
-.form-input {
-  padding: 0.8rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  background-color: #f8fafc;
 }
 
 .form-input:focus {
@@ -67,7 +59,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   background-color: #c7def540;
-  margin-top: 2%;
+  margin-top: 0.5rem;
 }
 
 /* 支付按钮 */

@@ -8,25 +8,28 @@
   margin: 0 auto;
 }
 
-/* Form Header */
 .form-header {
   font-size: 1.25rem;
   font-weight: 600;
   color: #2821fbd6;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1%;
+}
+
+.grey {
+  border-bottom: 1px solid #4a556863;
+  color: #a0aec0;
+  font-size: 0.75rem;
 }
 
 .form-topic {
   font-style: italic;
   color: #6d1cbd;
   margin-bottom: 1.5rem;
-  display: block;
 }
 
-/* Input Fields - General */
 .form-input {
   width: 100%;
-  padding: 0.75rem;
+  padding: 1%;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -74,7 +77,6 @@
   box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
 }
 
-/* Responsive Adjustments */
 @media (width <= 768px) {
   .options-row {
     grid-template-columns: 1fr;
