@@ -2,16 +2,15 @@
 .topic-selector {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 2px;
   margin-bottom: 2rem;
   justify-content: center;
 }
 
 /* Base Topic Button */
 .topic-btn {
-  padding: 0.6rem 1.2rem;
+  padding: 1% 1.2rem;
   border-radius: 20px;
-  border: none;
   background-color: #f0f4f8;
   color: #2d3748;
   font-weight: 500;

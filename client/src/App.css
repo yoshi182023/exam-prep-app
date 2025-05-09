@@ -164,7 +164,7 @@ navbar-container {
 .action-buttons {
   display: flex;
   flex-direction: column; /* 改为纵向排列 */
-  gap: 8%; /* 按钮间距 */
+  gap: 6%; /* 按钮间距 */
   width: 100%;
   max-width: 300px; /* 限制最大宽度（可选） */
   margin: 20% auto; /* 居中 */
@@ -175,9 +175,9 @@ navbar-container {
   width: 100%; /* 充满父容器 */
   font-size: 1.2rem;
   padding: 12px 0;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   border-radius: 45px;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 .add {
