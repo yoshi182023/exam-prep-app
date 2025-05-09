@@ -40,9 +40,8 @@
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
 }
 
-/* Special Fields - Larger Text Areas */
 .form-input-large {
-  min-height: 100px;
+  min-height: 20%;
   resize: vertical;
 }
 
@@ -60,7 +59,7 @@
 
 /* Submit Button */
 .submit-btn {
-  background: linear-gradient(to right, #4299e1, #3182ce);
+  background: linear-gradient(to right, #e5f040c9, #095685ce);
   color: white;
   border: none;
   border-radius: 6px;
@@ -68,7 +67,6 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 0.5rem;
 }
 
 .submit-btn:hover {

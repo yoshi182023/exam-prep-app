@@ -80,38 +80,38 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
       />
       <input
         name="answer"
-        placeholder="Correct Answer"
+        placeholder="Correct Answer (optional)"
         onChange={handleChange}
         value={formData.answer}
-        className="input"
+        className="form-input form-input-regular"
       />
       <input
         name="a"
         placeholder="Option A"
         onChange={handleChange}
         value={formData.a}
-        className="input"
+        className="form-input form-input-regular"
       />
       <input
         name="b"
         placeholder="Option B"
         onChange={handleChange}
         value={formData.b}
-        className="input"
+        className="form-input form-input-regular"
       />
       <input
         name="c"
         placeholder="Option C"
         onChange={handleChange}
         value={formData.c}
-        className="input"
+        className="form-input form-input-regular"
       />
       <textarea
         name="explanation"
         placeholder="Explanation"
         onChange={handleChange}
         value={formData.explanation}
-        className="input"
+        className="form-input form-input-large"
       />
       <input
         name="questionNumber"
@@ -120,9 +120,7 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
         value={formData.questionNumber}
         className="input"
       />
-      <button
-        type="submit"
-        className="btn mt-2 bg-blue-600 text-white rounded px-4 py-2">
+      <button type="submit" className="submit-btn">
         Submit
       </button>
     </form>
