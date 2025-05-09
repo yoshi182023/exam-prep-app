@@ -13,7 +13,8 @@ function Navbar() {
         <div className="copyright">
           <h3>Customer Support</h3>
           <p>If you have questions or experience a problem, please </p>
-          <span>Contact Us </span>
+          <span>Contact Us: </span>
+          <p>Email: galiana1818@gmail.com </p>
           <p>
             &copy; {new Date().getFullYear()} CFA Exam Prep. All rights
             reserved.

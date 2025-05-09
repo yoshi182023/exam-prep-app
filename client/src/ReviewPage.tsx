@@ -16,13 +16,14 @@ function ReviewPage() {
       {selectedTopic ? (
         <>
           {/* <CustomCardForm topic={selectedTopic} onAdd={handleAdd} /> */}
+
+          {/* 组件之间是“单向数据流”，它不知道 AddQuestionForm 提交了新数据。
+           我们用一个叫 refreshKey（或 refreshTrigger）的状态变量来做“刷新信号”。*/}
+          <ReviewList topic={selectedTopic} refreshKey={refreshKey} />
           <AddQuestionForm
             topic={selectedTopic}
             onAddSuccess={handleAddSuccess}
           />
-          {/* 组件之间是“单向数据流”，它不知道 AddQuestionForm 提交了新数据。
-           我们用一个叫 refreshKey（或 refreshTrigger）的状态变量来做“刷新信号”。*/}
-          <ReviewList topic={selectedTopic} refreshKey={refreshKey} />
         </>
       ) : (
         <div className="p-4">Please select a topic to review.</div>

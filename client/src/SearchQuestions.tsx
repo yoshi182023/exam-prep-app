@@ -44,8 +44,9 @@ export default function SearchQuestions() {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <h2>Search Questions</h2>
+      <h2>Search Questions In QuestionBank</h2>
       <input
+        className="questionBank"
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}

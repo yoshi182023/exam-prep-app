@@ -64,9 +64,8 @@ const AddQuestionForm: React.FC<Props> = ({ topic, onAddSuccess }) => {
     <form
       onSubmit={handleSubmit}
       className="p-4 bg-white shadow-md rounded mb-4">
-      <h2 className="text-lg font-bold mb-2">
-        Add a new question for "{topic}"
-      </h2>
+      <h2 className="text-lg font-bold mb-2">Set your own new question for</h2>
+      <p>"{topic}"</p>
       <input
         name="los"
         placeholder="LOS"
