@@ -127,7 +127,6 @@ export default function QuestionComponent() {
 
   return (
     <div className="question-container">
-      <TopicButtons onTopicChange={handleTopicChange} />
       <div className="question">Topic: {currentQuestion.topic}</div>
       <h3>{currentQuestion.question}</h3>
 
@@ -172,6 +171,7 @@ export default function QuestionComponent() {
           <p>{currentQuestion.explanation}</p>
         </div>
       )}
+      <TopicButtons onTopicChange={handleTopicChange} />
     </div>
   );
 }

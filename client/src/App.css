@@ -174,10 +174,10 @@ navbar-container {
 .action-buttons button {
   width: 100%; /* 充满父容器 */
   font-size: 1.2rem;
-  padding: 12px 0;
-  margin-bottom: 15px;
+  padding: 1% 0;
+  margin-bottom: 10%;
   border-radius: 45px;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .add {
