@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <>
       <div className="navbar top">
-        <NavLink to="search">Search Questions</NavLink>
+        <NavLink to="search">Search Questions from QBank</NavLink>
       </div>{' '}
       <div className="navbar bottom">
         <NavLink to="wrong-answers">My Mistakes Journal</NavLink>

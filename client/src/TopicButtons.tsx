@@ -1,4 +1,5 @@
 // src/components/TopicButtons.tsx
+import './TopicButtons.css';
 
 type TopicButtonsProps = {
   onTopicChange: (topic: string) => void;
@@ -18,12 +19,12 @@ const TOPICS = [
 
 export default function TopicButtons({ onTopicChange }: TopicButtonsProps) {
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div className="topic-selector">
       {TOPICS.map((topic) => (
         <button
+          className="topic-btn"
           key={topic}
-          onClick={() => onTopicChange(topic)}
-          style={{ margin: '5px', padding: '3px 15px' }}>
+          onClick={() => onTopicChange(topic)}>
           {topic}
         </button>
       ))}

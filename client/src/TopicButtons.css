@@ -1,0 +1,40 @@
+/* Topic Selector Container */
+.topic-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+/* Base Topic Button */
+.topic-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f4f8;
+  color: #2d3748;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-size: 0.9rem;
+}
+
+/* Hover State */
+.topic-btn:hover {
+  background-color: #12e0579b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (width <= 768px) {
+  .topic-selector {
+    gap: 8px;
+  }
+
+  .topic-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}

@@ -14,14 +14,11 @@ export default function App() {
     <BrowserRouter>
       <div className="app-container">
         {' '}
-        {/* 导航容器 */}
         <div className="nav-container">
-          {/* Home 按钮 - 绝对最左边 */}
           <Link className="link-button home-button" to="/">
             Home
           </Link>
 
-          {/* 右侧按钮组 */}
           <div className="right-links">
             <Link className="link" to="/sign-in">
               Sign In
@@ -31,7 +28,6 @@ export default function App() {
         {/* 主内容区 */}
         <div className="main-content">
           <Routes>
-            {/* 根路由 */}
             <Route path="/" element={<Home />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/register" element={<RegistrationForm />} />
@@ -49,9 +45,6 @@ export default function App() {
                 </div>
               }
             />
-            {/* <Link className="link" to="/wrong-answers">
-          Mistakes
-        </Link> */}
           </Routes>
         </div>
       </div>

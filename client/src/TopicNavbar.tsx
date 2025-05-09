@@ -1,4 +1,6 @@
 import React from 'react';
+import './TopicButtons.css';
+
 const topics = [
   'Ethical and Professional Standards',
   'Quantitative Methods',
@@ -17,12 +19,12 @@ type Props = {
 
 const TopicNavbar: React.FC<Props> = ({ onSelectTopic }) => {
   return (
-    <div className="flex space-x-4 p-4 border-b">
+    <div className="topic-selector">
       {topics.map((topic) => (
         <button
           key={topic}
           onClick={() => onSelectTopic(topic)}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          className="topic-btn">
           {topic}
         </button>
       ))}

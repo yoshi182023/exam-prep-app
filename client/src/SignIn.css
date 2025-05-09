@@ -1,16 +1,12 @@
 /* Login Form Container */
-.container {
-  font-family: 'Segoe UI', Roboto, sans-serif;
-}
 
-/* Form Styling */
-.login-form {
+.container {
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  background-color: white;
   padding: 2rem;
-  width: 90%;
-  max-width: 380px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 .login-form:hover {
@@ -119,7 +115,6 @@
   text-decoration: underline;
 }
 
-/* Responsive Adjustments */
 @media (width <= 480px) {
   .login-form {
     padding: 1.5rem;
