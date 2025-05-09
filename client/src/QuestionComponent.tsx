@@ -128,7 +128,7 @@ export default function QuestionComponent() {
   return (
     <div className="question-container">
       <div className="question">Topic: {currentQuestion.topic}</div>
-      <h3>{currentQuestion.question}</h3>
+      <h3 style={{ textAlign: 'left' }}>{currentQuestion.question}</h3>
 
       <div className="option">
         {['a', 'b', 'c'].map((key) => (
