@@ -73,6 +73,22 @@ INSERT INTO questions (
   1
 );
 
+
+INSERT INTO questions (
+  questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  201701,
+  'Portfolio Management',
+  'Portfolio Risk and Return: Part II',
+  'Which of the following performance measures most likely relies on systematic risk as opposed to total risk when calculating a risk-adjusted return?',
+  'c',
+  'The Treynor ratio measures the return premium of a portfolio versus the risk-free asset relative to the portfolio''s beta, which is a measure of systematic risk.',
+  'Sharpe ratio',
+  'M-squared',
+  'Treynor ratio',
+  3
+);
+
 INSERT INTO questions (
     questionid, topic, los, question, answer, explanation, a, b, c, "questionNumber"
 ) VALUES (
@@ -227,7 +243,7 @@ INSERT INTO questions (
 ) VALUES (
   2020301,
   'Economics',
-  'A market structure characterized by homogeneous/standardized product differentiation is best described as:',
+  'The Firm and Market Structures',
   'A market structure characterized by homogeneous/standardized product differentiation is best described as:',
   'a',
   'A is correct. Perfect competition and oligopoly are characterized by homogeneous/
@@ -241,6 +257,21 @@ Monopoly -- Unique product. B C is incorrect because monopolistic competition do
   'B monopolistic competition.',
   'C monopoly.',
   1
+);
+
+INSERT INTO questions (
+  "questionid", topic, los, question, answer, explanation, a, b, c, "questionNumber"
+) VALUES (
+  2020302,
+  'Economics',
+  'Monetary and Fiscal Policy',
+  'The primary goal of both monetary and fiscal policy focuses on balancing economic growth and:',
+  'b',
+  'The goal of both monetary and fiscal policy is the creation of an economic environment characterized by positive, stable growth and low, stable inflation.',
+  'income distribution.',
+  'inflation.',
+  'employment.',
+  2
 );
 
 INSERT INTO questions (
