@@ -111,7 +111,7 @@ export function RegistrationForm() {
           <label className="form-label">Password </label>{' '}
           <input name="password" type="password" required />
           <label className="form-label">
-            Payment Information
+            Payment Info: (use 4242 4242 4242 4242 to become a beta user now)
             <div className="card-element-container">
               <CardElement />
             </div>

@@ -79,9 +79,9 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
   if (currentIndex !== null) {
     const review = reviews[currentIndex];
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
-        <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-xl">
-          <h2 className="text-xl font-bold mb-2">Topic: {review.topic}</h2>
+      <div>
+        <div>
+          <h2>Topic: {review.topic}</h2>
           <div>
             <strong>LOS:</strong> {review.los}
           </div>
