@@ -1,9 +1,5 @@
 /* Login Form Container */
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.container {
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -70,11 +66,11 @@
 /* Error Message */
 .error-message {
   color: #e53e3e;
-  font-size: 0.875rem;
   margin-bottom: 1rem;
-  padding: 0.5rem;
+  padding: 0.5%;
   background-color: #fff5f5;
   border-radius: 6px;
+  font-size: larger;
   border-left: 3px solid #e53e3e;
 }
 

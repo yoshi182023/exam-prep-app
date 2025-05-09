@@ -27,6 +27,7 @@ export default function SignInPage() {
       }
 
       const user = await res.json();
+      console.log(user);
       setUser(user);
       navigate('/wrong-answers');
     } catch (err) {
@@ -36,9 +37,7 @@ export default function SignInPage() {
 
   return (
     <div className="container">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-sm w-full">
+      <form onSubmit={handleSubmit}>
         <h2 className="form-header">Log in</h2>
 
         {error && <p className="error-message">{error}</p>}
