@@ -17,6 +17,8 @@
   "include": [
     ".",
     "../client/src/Reviewlist.tsx",
-    "../client/src/WrongAnswersPage.tsx"
+    "../client/src/WrongAnswersPage.tsx",
+    "../services/stripeService.ts",
+    "../client/src/SearchQuestions.tsx"
   ]
 }

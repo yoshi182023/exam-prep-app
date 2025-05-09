@@ -238,7 +238,12 @@ navbar-container {
   border: 2px dashed #edf6f1e4;
   border-radius: 12px;
   padding: 19px;
-  background-color: rgba(140, 176, 134, 0.164);
+  font-size: 1.2em;
+  background: linear-gradient(
+    to right,
+    rgba(243, 243, 7, 0.344),
+    rgba(255, 217, 0, 0.251)
+  );
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.4s;

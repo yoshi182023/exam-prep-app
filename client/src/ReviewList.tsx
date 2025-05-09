@@ -134,7 +134,17 @@ const ReviewList: React.FC<Props> = ({ topic, refreshKey }) => {
                   e.stopPropagation(); // 👈 避免触发外层 onClick（进入卡片视图）
                   handleDelete(item);
                 }}
-                className="text-red-600 hover:text-red-800">
+                className="delete"
+                style={{
+                  backgroundColor: '#ef4444',
+                  color: 'white',
+                  padding: '0.25rem 0.5rem',
+                  borderRadius: '0.25rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontWeight: '500',
+                  transition: 'background-color 0.2s',
+                }}>
                 Delete
               </button>
             </div>
