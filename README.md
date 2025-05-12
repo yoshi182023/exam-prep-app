@@ -28,7 +28,6 @@ This is a full-stack web application designed to help users prepare for the CFA 
 ### Backend
 
 - **Node.js + Express**
-- **Sequelize** ORM with PostgreSQL
 - **JWT Authentication** (stored in HTTP-only cookies)
 - **RESTful API endpoints**
 
