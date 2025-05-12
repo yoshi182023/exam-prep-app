@@ -40,36 +40,6 @@ This is a full-stack web application designed to help users prepare for the CFA 
 | GET    | `/api/questions` | Fetch questions by topic/LOS        |
 | GET    | `/api/wrong`     | Fetch user's incorrect answers      |
 
-## Database Schema (simplified)
 
-### Users
-
-| Column   | Type    |
-|----------|---------|
-| userid   | INTEGER |
-| username | STRING  |
-| password | STRING (hashed) |
-
-### Questions
-
-| Column     | Type    |
-|------------|---------|
-| questionid | INTEGER |
-| topic      | STRING  |
-| los        | STRING  |
-| question   | TEXT    |
-| answer     | STRING  |
-| options    | JSON    |
-
-### Answers
-
-| Column        | Type    |
-|---------------|---------|
-| answerid      | INTEGER |
-| userid        | INTEGER |
-| questionid    | INTEGER |
-| selectedAnswer| STRING  |
-| isCorrect     | BOOLEAN |
-| createdAt     | DATE    |
 
 
