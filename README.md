@@ -72,10 +72,4 @@ This is a full-stack web application designed to help users prepare for the CFA 
 | isCorrect     | BOOLEAN |
 | createdAt     | DATE    |
 
-## Getting Started
 
-1. **Clone the repo**
-
-```bash
-git clone https://github.com/yourusername/cfa-quiz-app.git
-cd cfa-quiz-app
