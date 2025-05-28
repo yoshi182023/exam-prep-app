@@ -1,10 +1,10 @@
-# full-stack-project
 
-A full stack TypeScript solo project.
+
+
 
 # CFA Quiz Web App
 
-This is a full-stack web application designed to help users prepare for the CFA exam. Users can log in, answer multiple-choice questions, and track their progress. Incorrectly answered questions are saved and can be reviewed later.
+This is a full-stack web application designed to help users prepare for the CFA exam. Users can log in, answer multiple-choice questions, and track their progress. Incorrectly answered questions are saved and can be reviewed later. A full stack TypeScript solo project.
 
 ## Features
 
