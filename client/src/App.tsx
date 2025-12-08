@@ -2,29 +2,49 @@ import QuestionComponent from './QuestionComponent';
 import Home from './Home';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter, Link, useNavigate } from 'react-router-dom';
 import SignInPage from './SignInPage';
 import { RegistrationForm } from './RegistrationForm';
 import ReviewPage from './ReviewPage';
 import WrongAnswersPage from './WrongAnswersPage';
 import SearchQuestions from './SearchQuestions';
+import { useUser } from './UserContext';
 
+function TopNavbar() {
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    setUser(null);
+    navigate('/');
+  }
+
+  return (
+    <div className="nav-container">
+      <Link className="link-button home-button" to="/">
+        Home
+      </Link>
+
+      <div className="right-links">
+        {user ? (
+          <button className="link" onClick={handleSignOut}>
+            Sign out
+          </button>
+        ) : (
+          <Link className="link" to="/sign-in">
+            Sign In
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
 export default function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
         {' '}
-        <div className="nav-container">
-          <Link className="link-button home-button" to="/">
-            Home
-          </Link>
-
-          <div className="right-links">
-            <Link className="link" to="/sign-in">
-              Sign In
-            </Link>
-          </div>
-        </div>
+        <TopNavbar />
         {/* 主内容区 */}
         <div className="main-content">
           <Routes>
